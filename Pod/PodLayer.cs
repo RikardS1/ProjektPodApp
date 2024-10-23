@@ -17,7 +17,7 @@ namespace Pod
 
         public PodLayer()
         {
-            //här var det tomt
+            
         }
 
         public PodLayer(short iD, string title, string description, string category)
