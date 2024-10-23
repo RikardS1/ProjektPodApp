@@ -27,11 +27,11 @@ namespace DL
         //Deserialiserarklassen
         public List<T> XmlDeSer(string filepath)
         {
+            //Kollar om det finns en fil, om inte skapar den en ny
             if (!File.Exists(filepath))
             {
                 return new List<T>();
             }
-
 
             XmlSerializer xs = new XmlSerializer(typeof(List<T>));
             using (StreamReader sr = new StreamReader(filepath))

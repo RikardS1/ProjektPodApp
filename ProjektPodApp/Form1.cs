@@ -17,5 +17,10 @@ namespace ProjektPodApp
         {
             InitializeComponent();
         }
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("DU DÄR! Vill du återställa sidan?", "Du försöker återställa sidan.", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+        }
     }
 }
