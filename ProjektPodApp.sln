@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektPodApp", "ProjektPodApp\ProjektPodApp.csproj", "{248127E9-93AF-4D38-9A2A-5C402ED2D556}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{7FA2E45E-E471-48B5-89E0-9BFCE534FD2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DL", "DL\DL.csproj", "{43094DA9-2E22-4D80-88E4-A0D71919DA7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pod", "Pod\Pod.csproj", "{DC6590D1-2AAC-4FB1-98F1-CCD5523AF321}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{248127E9-93AF-4D38-9A2A-5C402ED2D556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{248127E9-93AF-4D38-9A2A-5C402ED2D556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{248127E9-93AF-4D38-9A2A-5C402ED2D556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{248127E9-93AF-4D38-9A2A-5C402ED2D556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA2E45E-E471-48B5-89E0-9BFCE534FD2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA2E45E-E471-48B5-89E0-9BFCE534FD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA2E45E-E471-48B5-89E0-9BFCE534FD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA2E45E-E471-48B5-89E0-9BFCE534FD2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43094DA9-2E22-4D80-88E4-A0D71919DA7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43094DA9-2E22-4D80-88E4-A0D71919DA7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43094DA9-2E22-4D80-88E4-A0D71919DA7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43094DA9-2E22-4D80-88E4-A0D71919DA7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6590D1-2AAC-4FB1-98F1-CCD5523AF321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6590D1-2AAC-4FB1-98F1-CCD5523AF321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6590D1-2AAC-4FB1-98F1-CCD5523AF321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6590D1-2AAC-4FB1-98F1-CCD5523AF321}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F811D1E6-18D2-456D-A64D-E01A10A45990}
+	EndGlobalSection
+EndGlobal
