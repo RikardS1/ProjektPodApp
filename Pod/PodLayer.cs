@@ -8,5 +8,8 @@ namespace Pod
 {
     public class PodLayer
     {
+        //todo allt en podd ska innehålla ska vara här =)
+        string Title { get; set; }
+        short ID { get; set; }
     }
 }
