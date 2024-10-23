@@ -9,7 +9,25 @@ namespace Pod
     public class PodLayer
     {
         //todo allt en podd ska innehålla ska vara här =)
-        string Title { get; set; }
-        short ID { get; set; }
+        public short ID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Category { get; set; }
+
+
+        public PodLayer()
+        {
+            //här var det tomt
+        }
+
+        public PodLayer(short iD, string title, string description, string category)
+        {
+            ID = iD;
+            Title = title;
+            Description = description;
+            Category = category;
+
+        }
+
     }
 }
