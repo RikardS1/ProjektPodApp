@@ -12,6 +12,8 @@ namespace DL
     public class DataLayer<T>
     {
         private string PlaceHolder;
+
+        //Serialiserarklassen
         public void XmlSer(List<T> poddar, string filepath)
         {
             XmlSerializer xs = new XmlSerializer(typeof(List<T>));
@@ -22,8 +24,15 @@ namespace DL
 
         }
 
+        //Deserialiserarklassen
         public List<T> XmlDeSer(string filepath)
         {
+            if (!File.Exists(filepath))
+            {
+                return new List<T>();
+            }
+
+
             XmlSerializer xs = new XmlSerializer(typeof(List<T>));
             using (StreamReader sr = new StreamReader(filepath))
             {
