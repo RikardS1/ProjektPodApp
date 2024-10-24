@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace BL
 {
-    class Serializer
+    class Serializer<T>
     {
         //Serialiserarklassen
         public void XmlSer(List<T> poddar, string filepath)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class BusinessLayer<T> : IRepository
+    public class BusinessLayer<T>
     {
         public int ID { get; set; }
 

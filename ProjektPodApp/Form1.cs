@@ -32,41 +32,44 @@ namespace ProjektPodApp
 
         private void ManageAddButton_Click(object sender, EventArgs e)
         {
-            string rsslink = ManageRSSTextBox.Text;
-            string name = ManageNameTextBox.Text;
+            MessageBox.Show("Du har klickat på lägg till-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            try
-            {
-                XmlDocument rssDoc = new XmlDocument();
-                rssDoc.Load(rsslink);
+            //string rsslink = ManageRSSTextBox.Text;
+            //string name = ManageNameTextBox.Text;
 
-                XmlNode nameNode = rssDoc.SelectSingleNode("//channel/title");
+            //try
+            //{
+            //    XmlDocument rssDoc = new XmlDocument();
+            //    rssDoc.Load(rsslink);
 
-                if (nameNode == null)
-                {
-                    MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            //    XmlNode nameNode = rssDoc.SelectSingleNode("//channel/title");
 
-                string officielltNamn = nameNode.InnerText;
-                Podd nyPodd = new Podd(name, officielltNamn);
-                int rowIndex = ManageDataGridView.Rows.Add();
+            //    if (nameNode == null)
+            //    {
+            //        MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
 
-
-                ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
-                ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
-
-                List<Podd> poddar = xmlData.ReadXML(filePath);
+            //    string officielltNamn = nameNode.InnerText;
+            //    Podd nyPodd = new Podd(name, officielltNamn);
+            //    int rowIndex = ManageDataGridView.Rows.Add();
 
 
-                poddar.Add(nyPodd);
-                System.Diagnostics.Debug.WriteLine("Podd tillagd");
+            //    ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
+            //    ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
 
-                xmlData.WriteXML(poddar, filePath);
-            
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fel vid bearbetning av RSS: {ex.Message}", "Kunde inte bearbeta RSS-strömmen", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    List<Podd> poddar = xmlData.ReadXML(filePath);
+
+
+            //    poddar.Add(nyPodd);
+            //    System.Diagnostics.Debug.WriteLine("Podd tillagd");
+
+            //    xmlData.WriteXML(poddar, filePath);
+
+
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Fel vid bearbetning av RSS: {ex.Message}", "Kunde inte bearbeta RSS-strömmen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
 
         }
 
@@ -90,9 +93,19 @@ namespace ProjektPodApp
             }
         }
 
-        private void ManageDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void CategoryAddButton_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Du har klickat på lägg till-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
+        private void CategoryEditButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Du har klickat på ändra-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void CategoryRemoveButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Du har klickat på ta bort-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
