@@ -14,10 +14,10 @@ namespace DL
         private string PlaceHolder;
 
         //Serialiserarklassen
-        public void XmlSer(List<T> poddar, string filepath)
+        public void XmlSer(List<PodLayer> poddar, string filepath)
         {
             XmlSerializer xs = new XmlSerializer(typeof(List<T>));
-            using (FileStream fs = new FileStream(filepath, FileMode.Append, FileAccess.Write))
+            using (FileStream fs = new FileStream(filepath, FileMode.Create, FileAccess.Write))
             {
                 xs.Serialize(fs, poddar);
             }

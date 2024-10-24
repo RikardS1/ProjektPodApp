@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pod
 {
+    [Serializable]
     public class PodLayer
     {
         //todo allt en podd ska innehålla ska vara här =)
