@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class BusinessLayer
+    public class BusinessLayer<T> : IRepository
     {
-        //hämta list T och manipulera datan, gör åtkomlig för presentationslagret
+        public int ID { get; set; }
 
         public void GetPodcasts()
         {

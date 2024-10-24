@@ -31,11 +31,12 @@ namespace BL
                 {
                     return false;
                 }
+                return true;
 
 
             } catch (Exception ex) {
                 Console.WriteLine("Nu har du allt kebabat till det! >:(");
-
+                return true;
             }
         }
 
