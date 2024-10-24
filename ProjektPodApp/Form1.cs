@@ -17,7 +17,6 @@ namespace ProjektPodApp
     {
         private XmlDocument RssDoc;
         private XmlNodeList RssItems;
-        private Serializer <T> XmlData = new Serializer<T>(); //Eftersom det inte finns någon koppling mellan GUI och DL så går inte detta
         private string filePath = "data.xml"; //data.xml finns inte för tillfället
 
         public Form1()
