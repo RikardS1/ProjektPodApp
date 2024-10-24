@@ -40,14 +40,14 @@ namespace BL
         }
 
         //validera RSS URL - returnar true om det är en valid RSS URL
-        public bool ValideraURL(string feedUrl)
+        public bool ValidateRSS(string feedUrl)
         {
             try
             {
                 //ladda RSS från URL
-                XDocument rssDocument = XDocument.Load(feedUrl);
+                XDocument rssDoc = XDocument.Load(feedUrl);
 
-                XElement rss = rssDocument.Element("rss");
+                XElement rss = rssDoc.Element("rss");
                 if (rss != null)
                 {
                     XElement channel = rss.Element("channel");
