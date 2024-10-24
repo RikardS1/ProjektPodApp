@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace DL
 {
     public class Repository<T> : IRepository<T> where T : DataLayer<T>
     {
-       public T GetById(int id)
+        public T GetById(int id)
         {
             throw new NotImplementedException();
         }
@@ -23,9 +24,9 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public void Delete(T entity) 
-        { 
-            throw new NotImplementedException(); 
+        public void Delete(T entity)
+        {
+            throw new NotImplementedException();
         }
 
     }

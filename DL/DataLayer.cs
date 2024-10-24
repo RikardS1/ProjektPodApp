@@ -9,9 +9,13 @@ using System.Xml.Serialization;
 
 namespace DL
 {
-    public class DataLayer<T>
+    public class DataLayer<T> // om flytta serial + deserial, ta bort <T>
     {
+        public int ID { get; set; } //ha kvar pls
         private string PlaceHolder;
+
+
+        //       TODO lägg serialisering och deserialisering i egen klass?????       ////////////////////////////////////
 
         //Serialiserarklassen
         public void XmlSer(List<T> poddar, string filepath)
