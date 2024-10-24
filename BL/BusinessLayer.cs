@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class BusinessLayer<T>
+    public class BusinessLayer
+
     {
         public int ID { get; set; }
 
