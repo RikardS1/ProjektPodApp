@@ -15,30 +15,7 @@ namespace BL
         {
 
         }
-        //om true - låt användaren skapa ny kategori
-        public bool ValidateNewCategory(string newCategory) 
-        {
-            try
-            {
-                XDocument document = XDocument.Load("data.xml");
-                string checkOK = newCategory;
-                var categoryExists = document.Descendants("category").Any(x => (string)x.Attribute("name") == checkOK);
-                if (categoryExists)
-                {
-                    return false;
-                } else
-                {
-                    return true;
-                }
 
-
-            } catch (Exception ex) {
-                Console.WriteLine("Nu har du allt kebabat till det! >:(");
-
-            }
-        }
-
-        //validera RSS URL - returnar true om det är en valid RSS URL
         public bool ValideraURL(string feedUrl)
         {
             try
