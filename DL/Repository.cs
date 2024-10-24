@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    public class Repository<T> : IRepository<T> where T : DataLayer<T>
+    public class Repository<T> : IRepository<T> where T : DataLayer
     {
         public T GetById(int id)
         {

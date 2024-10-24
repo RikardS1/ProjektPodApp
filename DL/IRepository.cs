@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    public interface IRepository<T> where T : DataLayer<T>
+    public interface IRepository<T> where T : DataLayer
     {
         T GetById(int id);
         void Create(T entity);
