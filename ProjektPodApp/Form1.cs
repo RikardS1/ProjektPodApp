@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace ProjektPodApp
 {
@@ -37,6 +38,7 @@ namespace ProjektPodApp
             try
             {
                 XmlDocument rssDoc = new XmlDocument();
+                rssDoc.Load(rsslink);
 
                 XmlNode nameNode = rssDoc.SelectSingleNode("//channel/title");
 
@@ -45,7 +47,22 @@ namespace ProjektPodApp
                     MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-            }
+                string officielltNamn = nameNode.InnerText;
+                Podd nyPodd = new Podd(name, officielltNamn);
+                int rowIndex = ManageDataGridView.Rows.Add();
+
+
+                ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
+
+                List<Podd> poddar = xmlData.ReadXML(filePath);
+
+
+                poddar.Add(nyPodd);
+                System.Diagnostics.Debug.WriteLine("Podd tillagd");
+
+                xmlData.WriteXML(poddar, filePath);
+            
             catch (Exception ex)
             {
                 MessageBox.Show($"Fel vid bearbetning av RSS: {ex.Message}", "Kunde inte bearbeta RSS-strömmen", MessageBoxButtons.OK, MessageBoxIcon.Error);
