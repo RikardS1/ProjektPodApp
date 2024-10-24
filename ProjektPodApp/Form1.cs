@@ -34,28 +34,28 @@ namespace ProjektPodApp
         {
             MessageBox.Show("Du har klickat på lägg till-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            //string rsslink = ManageRSSTextBox.Text;
-            //string name = ManageNameTextBox.Text;
+            string rsslink = ManageRSSTextBox.Text;
+            string name = ManageNameTextBox.Text;
 
-            //try
-            //{
-            //    XmlDocument rssDoc = new XmlDocument();
-            //    rssDoc.Load(rsslink);
+            try
+            {
+                XmlDocument rssDoc = new XmlDocument();
+                rssDoc.Load(rsslink);
 
-            //    XmlNode nameNode = rssDoc.SelectSingleNode("//channel/title");
+                XmlNode nameNode = rssDoc.SelectSingleNode("//channel/title");
 
-            //    if (nameNode == null)
-            //    {
-            //        MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
+                if (nameNode == null)
+                {
+                    MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
-            //    string officielltNamn = nameNode.InnerText;
-            //    Podd nyPodd = new Podd(name, officielltNamn);
-            //    int rowIndex = ManageDataGridView.Rows.Add();
+                //    string officielltNamn = nameNode.InnerText;
+                //    Podd nyPodd = new Podd(name, officielltNamn);
+                int rowIndex = ManageDataGridView.Rows.Add();
 
 
-            //    ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
-            //    ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
+            ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
+            //ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
 
             //    List<Podd> poddar = xmlData.ReadXML(filePath);
 
@@ -66,10 +66,10 @@ namespace ProjektPodApp
             //    xmlData.WriteXML(poddar, filePath);
 
 
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Fel vid bearbetning av RSS: {ex.Message}", "Kunde inte bearbeta RSS-strömmen", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fel vid bearbetning av RSS: {ex.Message}", "Kunde inte bearbeta RSS-strömmen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
