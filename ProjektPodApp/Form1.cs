@@ -1,4 +1,5 @@
 ﻿using BL;
+using Pod;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,13 +18,31 @@ namespace ProjektPodApp
     {
         private XmlDocument RssDoc;
         private XmlNodeList RssItems;
-        private string filePath = "data.xml"; //data.xml finns inte för tillfället
+        private readonly BusinessLayer _BusinessLayer;
+        private readonly string filePath = "data.xml"; //data.xml finns inte för tillfället
 
         public Form1()
         {
             InitializeComponent();
+            _BusinessLayer = new BusinessLayer(filePath);
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Ladda poddar i DataGridView när formuläret laddas
+            LoadPodcastsToGrid();
+        }
+
+        private void LoadPodcastsToGrid()
+        {
+            List<PodLayer> poddar = _BusinessLayer.GetAllPodcasts();
+            foreach (PodLayer podd in poddar)
+            {
+                int rowIndex = ManageDataGridView.Rows.Add();
+                ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.ID;
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.Title;
+            }
+        }
         private void RefreshButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("DU DÄR! Vill du återställa sidan?", "Du försöker återställa sidan.", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -48,23 +67,15 @@ namespace ProjektPodApp
                     MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                //    string officielltNamn = nameNode.InnerText;
-                //    Podd nyPodd = new Podd(name, officielltNamn);
+                string officielltNamn = nameNode.InnerText;
+                PodLayer nyPodd = new PodLayer(name, officielltNamn);
                 int rowIndex = ManageDataGridView.Rows.Add();
 
-
-            ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
-            //ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
-
-            //    List<Podd> poddar = xmlData.ReadXML(filePath);
-
-
-            //    poddar.Add(nyPodd);
-            //    System.Diagnostics.Debug.WriteLine("Podd tillagd");
-
-            //    xmlData.WriteXML(poddar, filePath);
-
-
+                ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
+                //List<PodLayer> poddar = XmlSer(filePath);
+                //poddar.Add(nyPodd);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show($"Fel vid bearbetning av RSS: {ex.Message}", "Kunde inte bearbeta RSS-strömmen", MessageBoxButtons.OK, MessageBoxIcon.Error);
