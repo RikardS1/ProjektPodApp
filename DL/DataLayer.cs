@@ -15,7 +15,7 @@ namespace DL
         private string PlaceHolder;
 
 
-        //       TODO lägg serialisering och deserialisering i egen klass?????       ////////////////////////////////////
+        // TODO lägg serialisering och deserialisering i egen klass??
 
         //Serialiserarklassen
         public void XmlSer(List<T> poddar, string filepath)
