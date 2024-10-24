@@ -9,10 +9,10 @@ using System.Xml.Serialization;
 
 namespace DL
 {
-    class Serializer<T>
+    public class Serializer<T>
     {
         //Serialiserarklassen
-        public void XmlSer(List<PodLayer> poddar, string filepath)
+        public void XmlSer(List<T> poddar, string filepath)
         {
             XmlSerializer xs = new XmlSerializer(typeof(List<T>));
             using (FileStream fs = new FileStream(filepath, FileMode.Create, FileAccess.Write))

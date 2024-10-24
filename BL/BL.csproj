@@ -50,6 +50,10 @@
       <Project>{43094da9-2e22-4d80-88e4-a0d71919da7c}</Project>
       <Name>DL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pod\Pod.csproj">
+      <Project>{DC6590D1-2AAC-4FB1-98F1-CCD5523AF321}</Project>
+      <Name>Pod</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
