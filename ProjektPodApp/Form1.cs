@@ -1,6 +1,4 @@
 ﻿using BL;
-using Pod;
-using Pod.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,7 +58,7 @@ namespace ProjektPodApp
                 }
 
                 string officielltNamn = nameNode.InnerText;
-                Feed nyPodd = new Feed(name, officielltNamn);
+                //Feed nyPodd = new Feed(name, officielltNamn);
                 int rowIndex = ManageDataGridView.Rows.Add();
 
                 ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
