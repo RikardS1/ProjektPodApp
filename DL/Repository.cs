@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    public class Repository<T> : IRepository<T> where T : DataLayer
+    public class Repository<T> : IRepository<T> where T :class
     {
         public T GetById(int id)
         {
@@ -19,12 +19,17 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public void Update(T entity)
+        public void Update(int id, T entity)
         {
             throw new NotImplementedException();
         }
 
         public void Delete(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
         {
             throw new NotImplementedException();
         }
