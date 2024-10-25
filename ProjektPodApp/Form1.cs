@@ -45,6 +45,7 @@ namespace ProjektPodApp
 
             string rsslink = ManageRSSTextBox.Text;
             string name = ManageNameTextBox.Text;
+            //adfadfadfadfadf
 
             try
             {
