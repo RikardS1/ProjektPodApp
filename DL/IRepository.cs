@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    public interface IRepository<T> where T : DataLayer
+    public interface IRepository<T> where T :class
     {
         T GetById(int id);
         void Create(T entity);
-        void Update(T entity);
+        void Update(int index, T entity);
         void Delete(T entity);
+        void SaveChanges();
     }
 }
