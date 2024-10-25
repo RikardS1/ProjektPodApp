@@ -117,5 +117,15 @@ namespace ProjektPodApp
         {
             MessageBox.Show("Du har klickat på ta bort-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ManageRSSTextBox_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
