@@ -1,5 +1,6 @@
 ﻿using BL;
 using Pod;
+using Pod.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,31 +19,21 @@ namespace ProjektPodApp
     {
         private XmlDocument RssDoc;
         private XmlNodeList RssItems;
-        private readonly BusinessLayer _BusinessLayer;
-        private readonly string filePath = "data.xml"; //data.xml finns inte för tillfället
+        
+        private string filePath = "data.xml"; //data.xml finns inte för tillfället
 
         public Form1()
         {
             InitializeComponent();
-            _BusinessLayer = new BusinessLayer(filePath);
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             // Ladda poddar i DataGridView när formuläret laddas
-            LoadPodcastsToGrid();
+           
         }
 
-        private void LoadPodcastsToGrid()
-        {
-            List<PodLayer> poddar = _BusinessLayer.GetAllPodcasts();
-            foreach (PodLayer podd in poddar)
-            {
-                int rowIndex = ManageDataGridView.Rows.Add();
-                ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.ID;
-                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.Title;
-            }
-        }
         private void RefreshButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("DU DÄR! Vill du återställa sidan?", "Du försöker återställa sidan.", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -68,7 +59,7 @@ namespace ProjektPodApp
                 }
 
                 string officielltNamn = nameNode.InnerText;
-                PodLayer nyPodd = new PodLayer(name, officielltNamn);
+                Feed nyPodd = new Feed(name, officielltNamn);
                 int rowIndex = ManageDataGridView.Rows.Add();
 
                 ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
