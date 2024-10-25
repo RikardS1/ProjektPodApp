@@ -1,6 +1,4 @@
 ﻿using BL;
-using Pod;
-using Pod.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,7 +34,12 @@ namespace ProjektPodApp
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("DU DÄR! Vill du återställa sidan?", "Du försöker återställa sidan.", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            MessageBox.Show("DU DÄR! Vill du återställa sidan?", "Du försöker återställa sidan.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if ()
+            {
+                
+            }
         }
 
         private void ManageAddButton_Click(object sender, EventArgs e)
@@ -60,7 +63,7 @@ namespace ProjektPodApp
                 }
 
                 string officielltNamn = nameNode.InnerText;
-                Feed nyPodd = new Feed(name, officielltNamn);
+                //Feed nyPodd = new Feed(name, officielltNamn);
                 int rowIndex = ManageDataGridView.Rows.Add();
 
                 ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
@@ -119,5 +122,22 @@ namespace ProjektPodApp
         {
 
         }
+
+        //Gör alla textrutor tomma
+        public void RestControls(Control reset)
+        {
+            foreach (Control content in reset.Controls)
+            {
+                if (reset is TextBox)
+                {
+                    ((TextBox)reset).Clear();
+                }
+                else if ()
+                {
+
+                }
+            }
+        }
+
     }
 }

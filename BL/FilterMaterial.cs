@@ -34,7 +34,7 @@ namespace BL
                         minutes = 60;
                         break;
                     default:
-                        throw new IndexOutOfRangeException(); //PEPEPEPEPEPE
+                        //throw new IndexOutOfRangeException(); //Throw ex?
                         again = true;
                         break;
 
