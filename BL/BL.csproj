@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\EpisodeController.cs" />
     <Compile Include="FilterMaterial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validering.cs" />
