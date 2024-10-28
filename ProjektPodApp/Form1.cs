@@ -183,21 +183,6 @@ namespace ProjektPodApp
 
         }
 
-        private void Form1_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ManageRSSTextBox_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ManageCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void ManageFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<string> kategorier = kategoriManager.HamtaKategorier();

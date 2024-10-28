@@ -107,7 +107,6 @@
             this.ManageRSSTextBox.Name = "ManageRSSTextBox";
             this.ManageRSSTextBox.Size = new System.Drawing.Size(180, 22);
             this.ManageRSSTextBox.TabIndex = 4;
-            this.ManageRSSTextBox.TextChanged += new System.EventHandler(this.ManageRSSTextBox_TextChanged_1);
             // 
             // label4
             // 
@@ -184,7 +183,6 @@
             this.ManageCategoryComboBox.Name = "ManageCategoryComboBox";
             this.ManageCategoryComboBox.Size = new System.Drawing.Size(112, 24);
             this.ManageCategoryComboBox.TabIndex = 9;
-            this.ManageCategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.ManageCategoryComboBox_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -382,7 +380,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.ManageDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
