@@ -38,20 +38,45 @@ namespace ProjektPodApp
            
         }
 
+        //Knapp för att tömma alla textrutor
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("DU DÄR! Vill du återställa sidan?", "Du försöker återställa sidan.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("DU DÄR! Vill du återställa sidan?", "Du försöker återställa sidan.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+
+            if (result == DialogResult.Yes)
+            {
+                //Tömmer alla TextBoxes
+                ManageRSSTextBox.Clear();
+                ManageNameTextBox.Clear();
+                CategoryManageTextBox.Clear();
+                //RichTextBox
+                EpisodeDescTextBox.Clear();
+
+                //Tömmer alla ComboBoxes
+                ManageCategoryComboBox.SelectedIndex = -1;
+                ManageFilterComboBox.SelectedIndex = -1;
+
+                //Tömmer alla ListBoxes
+                EpisodeListBox.ClearSelected();
+                CategoryCurrent.ClearSelected();
+
+                //Tömmer alla DataGridViewBoxes
+                ManageDataGridView.Rows.Clear();
+
+
+
+
+            }
             
         }
 
         private void ManageAddButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Du har klickat på lägg till-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //MessageBox.Show("Du har klickat på lägg till-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             string rsslink = ManageRSSTextBox.Text;
             string name = ManageNameTextBox.Text;
-            //adfadfadfadfadf
 
             try
             {
@@ -129,19 +154,6 @@ namespace ProjektPodApp
         private void ManageRSSTextBox_TextChanged_1(object sender, EventArgs e)
         {
 
-        }
-
-        //Gör alla textrutor tomma
-        public void RestControls(Control reset)
-        {
-            foreach (Control content in reset.Controls)
-            {
-                if (reset is TextBox)
-                {
-                    ((TextBox)reset).Clear();
-                }
-
-            }
         }
 
         private void ManageCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
