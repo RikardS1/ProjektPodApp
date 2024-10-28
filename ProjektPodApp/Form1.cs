@@ -36,10 +36,7 @@ namespace ProjektPodApp
         {
             MessageBox.Show("DU DÄR! Vill du återställa sidan?", "Du försöker återställa sidan.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if ()
-            {
-                
-            }
+            
         }
 
         private void ManageAddButton_Click(object sender, EventArgs e)
@@ -132,10 +129,7 @@ namespace ProjektPodApp
                 {
                     ((TextBox)reset).Clear();
                 }
-                else if ()
-                {
 
-                }
             }
         }
 
