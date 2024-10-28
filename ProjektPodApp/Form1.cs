@@ -259,7 +259,7 @@ namespace ProjektPodApp
                 int rowIndex = ManageDataGridView.Rows.Add(); // Lägg till en ny rad
                 ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.Name; // Fyll i Namn
                 ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficialName; // Fyll i Officiellt namn
-                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.Category;
+                ManageDataGridView.Rows[rowIndex].Cells[2].Value = podd.Category;
             }
         }
 
