@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.ManageFilterComboBox = new System.Windows.Forms.ComboBox();
+            this.comboBoxFiltreraKategori = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.ManageRSSTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,11 +49,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.CategoryCurrent = new System.Windows.Forms.GroupBox();
             this.CategoryAddButton = new System.Windows.Forms.Button();
             this.CategoryRemoveButton = new System.Windows.Forms.Button();
             this.CategoryEditButton = new System.Windows.Forms.Button();
             this.RefreshButton = new System.Windows.Forms.Button();
+<<<<<<< Updated upstream
+=======
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxHanteraKategori = new System.Windows.Forms.TextBox();
+            this.listBoxRedigerakategorier = new System.Windows.Forms.ListBox();
+>>>>>>> Stashed changes
             ((System.ComponentModel.ISupportInitialize)(this.ManageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,14 +81,24 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Hantera poddar:";
             // 
-            // ManageFilterComboBox
+            // comboBoxFiltreraKategori
             // 
+<<<<<<< Updated upstream
             this.ManageFilterComboBox.FormattingEnabled = true;
             this.ManageFilterComboBox.Location = new System.Drawing.Point(16, 89);
             this.ManageFilterComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageFilterComboBox.Name = "ManageFilterComboBox";
             this.ManageFilterComboBox.Size = new System.Drawing.Size(65, 24);
             this.ManageFilterComboBox.TabIndex = 2;
+=======
+            this.comboBoxFiltreraKategori.FormattingEnabled = true;
+            this.comboBoxFiltreraKategori.Location = new System.Drawing.Point(388, 901);
+            this.comboBoxFiltreraKategori.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxFiltreraKategori.Name = "comboBoxFiltreraKategori";
+            this.comboBoxFiltreraKategori.Size = new System.Drawing.Size(151, 28);
+            this.comboBoxFiltreraKategori.TabIndex = 2;
+            this.comboBoxFiltreraKategori.SelectedIndexChanged += new System.EventHandler(this.ManageFilterComboBox_SelectedIndexChanged);
+>>>>>>> Stashed changes
             // 
             // label3
             // 
@@ -254,6 +269,7 @@
             this.label8.TabIndex = 17;
             this.label8.Text = "Aktuell kategori";
             // 
+<<<<<<< Updated upstream
             // CategoryCurrent
             // 
             this.CategoryCurrent.Location = new System.Drawing.Point(1043, 210);
@@ -265,6 +281,8 @@
             this.CategoryCurrent.TabStop = false;
             this.CategoryCurrent.Text = "groupBox1";
             // 
+=======
+>>>>>>> Stashed changes
             // CategoryAddButton
             // 
             this.CategoryAddButton.Location = new System.Drawing.Point(1033, 395);
@@ -309,16 +327,52 @@
             this.RefreshButton.UseVisualStyleBackColor = true;
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
+<<<<<<< Updated upstream
+=======
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.label9.Location = new System.Drawing.Point(302, 901);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(85, 26);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "Filtrera:";
+            // 
+            // textBoxHanteraKategori
+            // 
+            this.textBoxHanteraKategori.Location = new System.Drawing.Point(1366, 792);
+            this.textBoxHanteraKategori.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBoxHanteraKategori.Name = "textBoxHanteraKategori";
+            this.textBoxHanteraKategori.Size = new System.Drawing.Size(140, 26);
+            this.textBoxHanteraKategori.TabIndex = 24;
+            // 
+            // listBoxRedigerakategorier
+            // 
+            this.listBoxRedigerakategorier.FormattingEnabled = true;
+            this.listBoxRedigerakategorier.ItemHeight = 20;
+            this.listBoxRedigerakategorier.Location = new System.Drawing.Point(1290, 229);
+            this.listBoxRedigerakategorier.Name = "listBoxRedigerakategorier";
+            this.listBoxRedigerakategorier.Size = new System.Drawing.Size(313, 484);
+            this.listBoxRedigerakategorier.TabIndex = 25;
+            // 
+>>>>>>> Stashed changes
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< Updated upstream
             this.ClientSize = new System.Drawing.Size(1381, 703);
+=======
+            this.ClientSize = new System.Drawing.Size(1699, 1004);
+            this.Controls.Add(this.listBoxRedigerakategorier);
+            this.Controls.Add(this.textBoxHanteraKategori);
+            this.Controls.Add(this.label9);
+>>>>>>> Stashed changes
             this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.CategoryEditButton);
             this.Controls.Add(this.CategoryRemoveButton);
             this.Controls.Add(this.CategoryAddButton);
-            this.Controls.Add(this.CategoryCurrent);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -334,7 +388,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ManageRSSTextBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.ManageFilterComboBox);
+            this.Controls.Add(this.comboBoxFiltreraKategori);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -350,7 +404,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox ManageFilterComboBox;
+        private System.Windows.Forms.ComboBox comboBoxFiltreraKategori;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox ManageRSSTextBox;
         private System.Windows.Forms.Label label4;
@@ -366,7 +420,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox CategoryCurrent;
         private System.Windows.Forms.Button CategoryAddButton;
         private System.Windows.Forms.Button CategoryRemoveButton;
         private System.Windows.Forms.Button CategoryEditButton;
@@ -374,6 +427,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TitleColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
+<<<<<<< Updated upstream
+=======
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxHanteraKategori;
+        private System.Windows.Forms.ListBox listBoxRedigerakategorier;
+>>>>>>> Stashed changes
     }
 }
 
