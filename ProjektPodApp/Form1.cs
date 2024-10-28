@@ -1,4 +1,5 @@
 ﻿using BL;
+using ProjektPodApp.BL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,13 +18,18 @@ namespace ProjektPodApp
     {
         private XmlDocument RssDoc;
         private XmlNodeList RssItems;
-        
+        private KategoriManager kategoriManager; //fält som refererar till BLL-lagret
+
         private string filePath = "data.xml"; //data.xml finns inte för tillfället
 
         public Form1()
         {
-            InitializeComponent();
             
+            InitializeComponent();
+            kategoriManager = new KategoriManager();
+            FyllKategoriComboBox(); //metod som fyller comboboxen med kategorier - se metodkropp längre ner
+            //listBoxRedigeraKategorierFyll();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -94,7 +100,12 @@ namespace ProjektPodApp
                 MessageBox.Show("Vänligen skriv in en RSS-länk", "RSS-Länk saknas!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        private void FyllKategoriComboBox() //metod som fyller cb. Hämtar data från DAL-lagret med hjälp av mellanhanden BLL
+        {
+            List<string> kategorier = kategoriManager.HamtaKategorier();
+            ManageCategoryComboBox.Items.Clear();
+            ManageCategoryComboBox.Items.AddRange(kategorier.ToArray());
+        }
         private void CategoryAddButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Du har klickat på lägg till-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -133,5 +144,16 @@ namespace ProjektPodApp
             }
         }
 
+        private void ManageCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ManageFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<string> kategorier = kategoriManager.HamtaKategorier();
+            ManageFilterComboBox.Items.Clear();
+            ManageFilterComboBox.Items.AddRange(kategorier.ToArray());
+        }
     }
 }

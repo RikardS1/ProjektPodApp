@@ -55,6 +55,7 @@
             this.CategoryEditButton = new System.Windows.Forms.Button();
             this.RefreshButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.textBoxHanteraKategori = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ManageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,9 +63,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F);
-            this.label1.Location = new System.Drawing.Point(595, 9);
+            this.label1.Location = new System.Drawing.Point(669, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(265, 51);
+            this.label1.Size = new System.Drawing.Size(319, 59);
             this.label1.TabIndex = 0;
             this.label1.Text = "KebabCast™";
             // 
@@ -72,37 +73,38 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.8F);
-            this.label2.Location = new System.Drawing.Point(12, 57);
+            this.label2.Location = new System.Drawing.Point(14, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(206, 31);
+            this.label2.Size = new System.Drawing.Size(247, 37);
             this.label2.TabIndex = 1;
             this.label2.Text = "Lägg till poddar:";
             // 
             // ManageFilterComboBox
             // 
             this.ManageFilterComboBox.FormattingEnabled = true;
-            this.ManageFilterComboBox.Location = new System.Drawing.Point(345, 721);
+            this.ManageFilterComboBox.Location = new System.Drawing.Point(388, 901);
             this.ManageFilterComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageFilterComboBox.Name = "ManageFilterComboBox";
-            this.ManageFilterComboBox.Size = new System.Drawing.Size(135, 24);
+            this.ManageFilterComboBox.Size = new System.Drawing.Size(151, 28);
             this.ManageFilterComboBox.TabIndex = 2;
+            this.ManageFilterComboBox.SelectedIndexChanged += new System.EventHandler(this.ManageFilterComboBox_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label3.Location = new System.Drawing.Point(230, 42);
+            this.label3.Location = new System.Drawing.Point(259, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 22);
+            this.label3.Size = new System.Drawing.Size(142, 26);
             this.label3.TabIndex = 3;
             this.label3.Text = "Skriv in RSS:";
             // 
             // ManageRSSTextBox
             // 
-            this.ManageRSSTextBox.Location = new System.Drawing.Point(234, 66);
+            this.ManageRSSTextBox.Location = new System.Drawing.Point(263, 82);
             this.ManageRSSTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageRSSTextBox.Name = "ManageRSSTextBox";
-            this.ManageRSSTextBox.Size = new System.Drawing.Size(180, 22);
+            this.ManageRSSTextBox.Size = new System.Drawing.Size(202, 26);
             this.ManageRSSTextBox.TabIndex = 4;
             this.ManageRSSTextBox.TextChanged += new System.EventHandler(this.ManageRSSTextBox_TextChanged_1);
             // 
@@ -110,18 +112,18 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label4.Location = new System.Drawing.Point(14, 107);
+            this.label4.Location = new System.Drawing.Point(16, 134);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(132, 22);
+            this.label4.Size = new System.Drawing.Size(161, 26);
             this.label4.TabIndex = 5;
             this.label4.Text = "Namn på podd:";
             // 
             // ManageNameTextBox
             // 
-            this.ManageNameTextBox.Location = new System.Drawing.Point(18, 131);
+            this.ManageNameTextBox.Location = new System.Drawing.Point(20, 164);
             this.ManageNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageNameTextBox.Name = "ManageNameTextBox";
-            this.ManageNameTextBox.Size = new System.Drawing.Size(175, 22);
+            this.ManageNameTextBox.Size = new System.Drawing.Size(196, 26);
             this.ManageNameTextBox.TabIndex = 6;
             // 
             // ManageDataGridView
@@ -132,12 +134,12 @@
             this.NameColumn,
             this.TitleColumn,
             this.Category});
-            this.ManageDataGridView.Location = new System.Drawing.Point(18, 181);
+            this.ManageDataGridView.Location = new System.Drawing.Point(20, 226);
             this.ManageDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageDataGridView.Name = "ManageDataGridView";
             this.ManageDataGridView.RowHeadersWidth = 51;
             this.ManageDataGridView.RowTemplate.Height = 24;
-            this.ManageDataGridView.Size = new System.Drawing.Size(671, 530);
+            this.ManageDataGridView.Size = new System.Drawing.Size(755, 662);
             this.ManageDataGridView.TabIndex = 7;
             this.ManageDataGridView.Tag = "";
             // 
@@ -164,10 +166,10 @@
             // 
             // ManageAddButton
             // 
-            this.ManageAddButton.Location = new System.Drawing.Point(371, 125);
+            this.ManageAddButton.Location = new System.Drawing.Point(417, 156);
             this.ManageAddButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageAddButton.Name = "ManageAddButton";
-            this.ManageAddButton.Size = new System.Drawing.Size(85, 35);
+            this.ManageAddButton.Size = new System.Drawing.Size(96, 44);
             this.ManageAddButton.TabIndex = 8;
             this.ManageAddButton.Text = "Lägg ägg";
             this.ManageAddButton.UseVisualStyleBackColor = true;
@@ -176,28 +178,29 @@
             // ManageCategoryComboBox
             // 
             this.ManageCategoryComboBox.FormattingEnabled = true;
-            this.ManageCategoryComboBox.Location = new System.Drawing.Point(223, 131);
+            this.ManageCategoryComboBox.Location = new System.Drawing.Point(251, 164);
             this.ManageCategoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageCategoryComboBox.Name = "ManageCategoryComboBox";
-            this.ManageCategoryComboBox.Size = new System.Drawing.Size(112, 24);
+            this.ManageCategoryComboBox.Size = new System.Drawing.Size(126, 28);
             this.ManageCategoryComboBox.TabIndex = 9;
+            this.ManageCategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.ManageCategoryComboBox_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label5.Location = new System.Drawing.Point(219, 107);
+            this.label5.Location = new System.Drawing.Point(246, 134);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 22);
+            this.label5.Size = new System.Drawing.Size(99, 26);
             this.label5.TabIndex = 10;
             this.label5.Text = "Kategori:";
             // 
             // ManageRemoveButton
             // 
-            this.ManageRemoveButton.Location = new System.Drawing.Point(513, 715);
+            this.ManageRemoveButton.Location = new System.Drawing.Point(577, 894);
             this.ManageRemoveButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageRemoveButton.Name = "ManageRemoveButton";
-            this.ManageRemoveButton.Size = new System.Drawing.Size(85, 35);
+            this.ManageRemoveButton.Size = new System.Drawing.Size(96, 44);
             this.ManageRemoveButton.TabIndex = 11;
             this.ManageRemoveButton.Text = "Ta bort";
             this.ManageRemoveButton.UseVisualStyleBackColor = true;
@@ -205,10 +208,10 @@
             // 
             // ManageEditButton
             // 
-            this.ManageEditButton.Location = new System.Drawing.Point(604, 715);
+            this.ManageEditButton.Location = new System.Drawing.Point(680, 894);
             this.ManageEditButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ManageEditButton.Name = "ManageEditButton";
-            this.ManageEditButton.Size = new System.Drawing.Size(85, 35);
+            this.ManageEditButton.Size = new System.Drawing.Size(96, 44);
             this.ManageEditButton.TabIndex = 12;
             this.ManageEditButton.Text = "Ändra";
             this.ManageEditButton.UseVisualStyleBackColor = true;
@@ -217,19 +220,19 @@
             // EpisodeListBox
             // 
             this.EpisodeListBox.FormattingEnabled = true;
-            this.EpisodeListBox.ItemHeight = 16;
-            this.EpisodeListBox.Location = new System.Drawing.Point(722, 183);
+            this.EpisodeListBox.ItemHeight = 20;
+            this.EpisodeListBox.Location = new System.Drawing.Point(812, 229);
             this.EpisodeListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EpisodeListBox.Name = "EpisodeListBox";
-            this.EpisodeListBox.Size = new System.Drawing.Size(350, 276);
+            this.EpisodeListBox.Size = new System.Drawing.Size(393, 344);
             this.EpisodeListBox.TabIndex = 13;
             // 
             // EpisodeDescTextBox
             // 
-            this.EpisodeDescTextBox.Location = new System.Drawing.Point(722, 501);
+            this.EpisodeDescTextBox.Location = new System.Drawing.Point(812, 626);
             this.EpisodeDescTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EpisodeDescTextBox.Name = "EpisodeDescTextBox";
-            this.EpisodeDescTextBox.Size = new System.Drawing.Size(350, 210);
+            this.EpisodeDescTextBox.Size = new System.Drawing.Size(393, 262);
             this.EpisodeDescTextBox.TabIndex = 14;
             this.EpisodeDescTextBox.Text = "";
             // 
@@ -237,18 +240,18 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label6.Location = new System.Drawing.Point(718, 159);
+            this.label6.Location = new System.Drawing.Point(808, 199);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 22);
+            this.label6.Size = new System.Drawing.Size(84, 26);
             this.label6.TabIndex = 15;
             this.label6.Text = "Avsnitt:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(719, 483);
+            this.label7.Location = new System.Drawing.Point(809, 604);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(112, 16);
+            this.label7.Size = new System.Drawing.Size(129, 20);
             this.label7.TabIndex = 16;
             this.label7.Text = "Poddbeskrivning:";
             // 
@@ -256,29 +259,29 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label8.Location = new System.Drawing.Point(1142, 159);
+            this.label8.Location = new System.Drawing.Point(1285, 199);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(133, 22);
+            this.label8.Size = new System.Drawing.Size(161, 26);
             this.label8.TabIndex = 17;
             this.label8.Text = "Aktuell kategori";
             // 
             // CategoryCurrent
             // 
-            this.CategoryCurrent.Location = new System.Drawing.Point(1146, 183);
+            this.CategoryCurrent.Location = new System.Drawing.Point(1289, 229);
             this.CategoryCurrent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CategoryCurrent.Name = "CategoryCurrent";
             this.CategoryCurrent.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CategoryCurrent.Size = new System.Drawing.Size(325, 420);
+            this.CategoryCurrent.Size = new System.Drawing.Size(366, 525);
             this.CategoryCurrent.TabIndex = 18;
             this.CategoryCurrent.TabStop = false;
             this.CategoryCurrent.Text = "groupBox1";
             // 
             // CategoryAddButton
             // 
-            this.CategoryAddButton.Location = new System.Drawing.Point(1386, 607);
+            this.CategoryAddButton.Location = new System.Drawing.Point(1559, 824);
             this.CategoryAddButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CategoryAddButton.Name = "CategoryAddButton";
-            this.CategoryAddButton.Size = new System.Drawing.Size(85, 35);
+            this.CategoryAddButton.Size = new System.Drawing.Size(96, 44);
             this.CategoryAddButton.TabIndex = 19;
             this.CategoryAddButton.Text = "Lägg till";
             this.CategoryAddButton.UseVisualStyleBackColor = true;
@@ -286,10 +289,10 @@
             // 
             // CategoryRemoveButton
             // 
-            this.CategoryRemoveButton.Location = new System.Drawing.Point(1214, 607);
+            this.CategoryRemoveButton.Location = new System.Drawing.Point(1366, 824);
             this.CategoryRemoveButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CategoryRemoveButton.Name = "CategoryRemoveButton";
-            this.CategoryRemoveButton.Size = new System.Drawing.Size(85, 35);
+            this.CategoryRemoveButton.Size = new System.Drawing.Size(96, 44);
             this.CategoryRemoveButton.TabIndex = 20;
             this.CategoryRemoveButton.Text = "Ta bort";
             this.CategoryRemoveButton.UseVisualStyleBackColor = true;
@@ -297,10 +300,10 @@
             // 
             // CategoryEditButton
             // 
-            this.CategoryEditButton.Location = new System.Drawing.Point(1300, 607);
+            this.CategoryEditButton.Location = new System.Drawing.Point(1462, 824);
             this.CategoryEditButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CategoryEditButton.Name = "CategoryEditButton";
-            this.CategoryEditButton.Size = new System.Drawing.Size(85, 35);
+            this.CategoryEditButton.Size = new System.Drawing.Size(96, 44);
             this.CategoryEditButton.TabIndex = 21;
             this.CategoryEditButton.Text = "Ändra";
             this.CategoryEditButton.UseVisualStyleBackColor = true;
@@ -308,10 +311,10 @@
             // 
             // RefreshButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(1433, 757);
+            this.RefreshButton.Location = new System.Drawing.Point(1612, 946);
             this.RefreshButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(85, 35);
+            this.RefreshButton.Size = new System.Drawing.Size(96, 44);
             this.RefreshButton.TabIndex = 22;
             this.RefreshButton.Text = "Återställ";
             this.RefreshButton.UseVisualStyleBackColor = true;
@@ -321,17 +324,26 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.label9.Location = new System.Drawing.Point(268, 721);
+            this.label9.Location = new System.Drawing.Point(302, 901);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(71, 22);
+            this.label9.Size = new System.Drawing.Size(85, 26);
             this.label9.TabIndex = 23;
             this.label9.Text = "Filtrera:";
             // 
+            // textBoxHanteraKategori
+            // 
+            this.textBoxHanteraKategori.Location = new System.Drawing.Point(1366, 792);
+            this.textBoxHanteraKategori.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBoxHanteraKategori.Name = "textBoxHanteraKategori";
+            this.textBoxHanteraKategori.Size = new System.Drawing.Size(140, 26);
+            this.textBoxHanteraKategori.TabIndex = 24;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1582, 803);
+            this.ClientSize = new System.Drawing.Size(1699, 1004);
+            this.Controls.Add(this.textBoxHanteraKategori);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.CategoryEditButton);
@@ -395,6 +407,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TitleColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxHanteraKategori;
     }
 }
 
