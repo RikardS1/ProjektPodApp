@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer.cs" />
-    <Compile Include="DL.Kayegorier.cs" />
+    <Compile Include="DL.Kategorier.cs" />
+    <Compile Include="DL.Poddar.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
