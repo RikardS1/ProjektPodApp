@@ -245,9 +245,15 @@ namespace ProjektPodApp
 
         private void ManageFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<string> kategorier = kategoriManager.HamtaKategorier();
-            ManageFilterComboBox.Items.Clear();
-            ManageFilterComboBox.Items.AddRange(kategorier.ToArray());
+            string valdKategori = ManageFilterComboBox.SelectedItem?.ToString(); // Hämta vald kategori
+            List<Feed> poddar = poddarManager.HamtaPoddar(); // Hämta alla poddar
+
+            // Filtrera poddar baserat på vald kategori
+            var filter = poddar.Where(pod => pod.Category.Equals(valdKategori))
+                               .Select(pod => pod);
+
+            // Fyll `DataGridView` med de filtrerade poddarna
+            FyllDataGridViewMedPoddar(filter);
         }
         private void FyllDataGridViewMedPoddar()
         {
@@ -257,12 +263,23 @@ namespace ProjektPodApp
             foreach (var podd in poddar)
             {
                 int rowIndex = ManageDataGridView.Rows.Add(); // Lägg till en ny rad
-                ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.Name; // Fyll i Namn
-                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficialName; // Fyll i Officiellt namn
+                ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.Name; 
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficialName; 
                 ManageDataGridView.Rows[rowIndex].Cells[2].Value = podd.Category;
             }
         }
+        private void FyllDataGridViewMedPoddar(IEnumerable<Feed> poddar)
+        {
+            ManageDataGridView.Rows.Clear(); // Töm DataGridView
 
+            foreach (var podd in poddar)
+            {
+                int rowIndex = ManageDataGridView.Rows.Add(); // Lägg till en ny rad
+                ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.Name;
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficialName;
+                ManageDataGridView.Rows[rowIndex].Cells[2].Value = podd.Category;
+            }
+        }
         private void CategoryCurrent_SelectedIndexChanged(object sender, EventArgs e)
         {
 
