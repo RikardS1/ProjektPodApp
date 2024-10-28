@@ -1,99 +1,87 @@
-﻿
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Xml.Serialization;
+﻿using Pod.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 
-    namespace ProjecktPodApp.DL
+namespace ProjecktPodApp.DL
+{
+    public class PodDataAccess
     {
-        public class PodDataAccess //datalagret har här färdiga kategorier som ligger inom metoden HamtaKategorier.
+        private const string PoddFolder = "Podd";
+        private string PoddFil;
+
+        public PodDataAccess()
         {
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string PoddPath = Path.Combine(desktopPath, PoddFolder);
+            PoddFil = Path.Combine(PoddPath, "Poddar.xml");
 
-            private const string PoddFolder = "Podd"; //Filnamn för XML filen
-            private string PoddFil;
-
-            public PodDataAccess()
+            if (!Directory.Exists(PoddPath))
             {
-                // Hämta sökvägen till skrivbordet och kombinera med mappens namn
-                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                string PoddPath = Path.Combine(desktopPath, PoddFolder);
+                Directory.CreateDirectory(PoddPath);
+            }
+        }
 
-                // Sätt sökvägen till filen
-                PoddFil = Path.Combine(PoddPath, "Poddar.xml");
-
-                // Kontrollera och skapa mappen om den inte finns
-                if (!Directory.Exists(PoddPath))
-                {
-                    Directory.CreateDirectory(PoddPath);
-                }
+        public List<Feed> HamtaPoddar()
+        {
+            if (!File.Exists(PoddFil))
+            {
+                return new List<Feed>(); // Returnera en tom lista om filen inte finns
             }
 
-
-
-            public List<string> HamtaPoddar() //returnerar en lista med kategorier
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Feed>));
+            using (FileStream fs = new FileStream(PoddFil, FileMode.Open))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<string>)); //Skapa en xmlSerializer som hanterar listan
+                return (List<Feed>)serializer.Deserialize(fs);
+            }
+        }
 
-                using (FileStream fs = new FileStream(PoddFil, FileMode.Open)) //Öppnar xml-filen för att läsa in data
-
-                {
-                    return (List<string>)serializer.Deserialize(fs); //Deseriaiserar xml innehållet till en lista med Strings (Kategorier), den retuneras sedan
-                }
-
+        public void LaggTillPoddar(Feed nyPodd)
+        {
+            var poddar = HamtaPoddar();
+            if (!string.IsNullOrEmpty(nyPodd.Name) && !string.IsNullOrEmpty(nyPodd.OfficielltNamn))
+            {
+                poddar.Add(nyPodd);
             }
 
-            public void LaggTillPoddar(string nyPoddar) //lägger till ny kategori i listan
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Feed>));
+            using (FileStream fs = new FileStream(PoddFil, FileMode.Create))
             {
-                var poddar = HamtaPoddar();
+                serializer.Serialize(fs, poddar);
+            }
+        }
 
-
-                if (!string.IsNullOrEmpty(nyPoddar))
-                {
-                    poddar.Add(nyPoddar);
-                }
-
-                XmlSerializer serializer = new XmlSerializer(typeof(List<string>)); //Skapa en xmlSerializer som hanterar listan
-
-                using (FileStream fs = new FileStream(PoddFil, FileMode.Create)) //Öppnar xml-filen för att läsa in data
-
-                {
-                    serializer.Serialize(fs, poddar);
-                }
+        public void AndraPoddar(Feed gammalPodd, Feed nyPodd)
+        {
+            var poddar = HamtaPoddar();
+            int index = poddar.FindIndex(p => p.Name == gammalPodd.Name && p.OfficielltNamn == gammalPodd.OfficielltNamn);
+            if (index != -1)
+            {
+                poddar[index] = nyPodd;
             }
 
-
-
-            public void AndraPoddar(string gammalPoddar, string nyPoddar)
-
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Feed>));
+            using (FileStream fs = new FileStream(PoddFil, FileMode.Create))
             {
-                var poddar = HamtaPoddar();
-                int index = poddar.IndexOf(gammalPoddar); 
-                if (index != -1)
-                {
-                    poddar[index] = nyPoddar;
-                }
+                serializer.Serialize(fs, poddar);
+            }
+        }
 
-                XmlSerializer serializer = new XmlSerializer(typeof(List<string>));
-
-                using (FileStream fs = new FileStream(PoddFil, FileMode.Create))
-                {
-                    serializer.Serialize(fs, poddar);
-                }
+        public void TaBortPoddar(Feed gammalPodd)
+        {
+            var poddar = HamtaPoddar();
+            int index = poddar.FindIndex(p => p.Name == gammalPodd.Name && p.OfficielltNamn == gammalPodd.OfficielltNamn);
+            if (index != -1)
+            {
+                poddar.RemoveAt(index);
             }
 
-            public void TaBortPoddar(string gammalPoddar)
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Feed>));
+            using (FileStream fs = new FileStream(PoddFil, FileMode.Create))
             {
-                var poddar = HamtaPoddar();
-                int index = poddar.IndexOf(gammalPoddar); // Räknar i listan efter gammalkategori
-                if (index != -1)
-                {
-                    poddar.RemoveAt(index);
-                } //lägg till kod för xml och serialisera, se chat. men ev gör interface av det
+                serializer.Serialize(fs, poddar);
             }
         }
     }
-
-
+}

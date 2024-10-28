@@ -1,4 +1,5 @@
 ﻿using BL;
+using Pod.Models;
 using ProjektPodApp.BL;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,7 @@ namespace ProjektPodApp
         private XmlDocument RssDoc;
         private XmlNodeList RssItems;
         private KategoriManager kategoriManager; //fält som refererar till BLL-lagret
-
-        private string filePath = "data.xml"; //data.xml finns inte för tillfället
+        private PoddarManager poddarManager = new PoddarManager();
 
         public Form1()
         {
@@ -29,13 +29,15 @@ namespace ProjektPodApp
             kategoriManager = new KategoriManager();
             FyllKategoriComboBox(); //metod som fyller comboboxen med kategorier - se metodkropp längre ner
             //listBoxRedigeraKategorierFyll();
+            FyllDataGridViewMedPoddar();
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             // Ladda poddar i DataGridView när formuläret laddas
-           
+            FyllDataGridViewMedPoddar();
+
         }
 
         //Knapp för att tömma alla textrutor
@@ -82,16 +84,21 @@ namespace ProjektPodApp
                 if (nameNode == null)
                 {
                     MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
                 string officielltNamn = nameNode.InnerText;
-                //Feed nyPodd = new Feed(name, officielltNamn);
-                int rowIndex = ManageDataGridView.Rows.Add();
 
+                // Skapa en ny instans av Feed för att representera podcasten
+                Feed nyPodd = new Feed(name, officielltNamn);
+
+                // Lägg till Feed-objektet i poddarManager
+                poddarManager.LaggTillPoddar(nyPodd);
+
+                // Lägg till i DataGridView
+                int rowIndex = ManageDataGridView.Rows.Add();
                 ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
                 ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
-                //List<PodLayer> poddar = XmlSer(filePath);
-                //poddar.Add(nyPodd);
 
                 MessageBox.Show("Podden har lagts till", "test", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -189,5 +196,18 @@ namespace ProjektPodApp
             ManageFilterComboBox.Items.Clear();
             ManageFilterComboBox.Items.AddRange(kategorier.ToArray());
         }
+        private void FyllDataGridViewMedPoddar()
+        {
+            List<Feed> poddar = poddarManager.HamtaPoddar(); // Hämta poddar från PoddarManager
+            ManageDataGridView.Rows.Clear(); // Töm DataGridView
+
+            foreach (var podd in poddar)
+            {
+                int rowIndex = ManageDataGridView.Rows.Add(); // Lägg till en ny rad
+                ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.Name; // Fyll i Namn
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficielltNamn; // Fyll i Officiellt namn
+            }
+        }
+
     }
 }
