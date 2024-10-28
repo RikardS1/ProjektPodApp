@@ -45,7 +45,8 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\EpisodeController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
-    <Compile Include="FilterMaterial.cs" />
+    <Compile Include="FilterKategori.cs" />
+    <Compile Include="PoddarRss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validering.cs" />
   </ItemGroup>

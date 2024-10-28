@@ -45,14 +45,14 @@
 
             }
 
-            public void LaggTillKategori(string nyKategori) //lägger till ny kategori i listan
+            public void LaggTillPoddar(string nyPoddar) //lägger till ny kategori i listan
             {
                 var poddar = HamtaPoddar();
 
 
-                if (!string.IsNullOrEmpty(nyKategori))
+                if (!string.IsNullOrEmpty(nyPoddar))
                 {
-                    poddar.Add(nyKategori);
+                    poddar.Add(nyPoddar);
                 }
 
                 XmlSerializer serializer = new XmlSerializer(typeof(List<string>)); //Skapa en xmlSerializer som hanterar listan
@@ -84,7 +84,7 @@
                 }
             }
 
-            public void TaBortKategori(string gammalPoddar)
+            public void TaBortPoddar(string gammalPoddar)
             {
                 var poddar = HamtaPoddar();
                 int index = poddar.IndexOf(gammalPoddar); // Räknar i listan efter gammalkategori
