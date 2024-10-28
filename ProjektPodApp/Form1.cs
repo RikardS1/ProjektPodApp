@@ -63,18 +63,12 @@ namespace ProjektPodApp
 
                 //Tömmer alla DataGridViewBoxes
                 ManageDataGridView.Rows.Clear();
-
-
-
-
             }
             
         }
 
         private void ManageAddButton_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("Du har klickat på lägg till-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             string rsslink = ManageRSSTextBox.Text;
             string name = ManageNameTextBox.Text;
 
@@ -98,6 +92,8 @@ namespace ProjektPodApp
                 ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
                 //List<PodLayer> poddar = XmlSer(filePath);
                 //poddar.Add(nyPodd);
+
+                MessageBox.Show("Podden har lagts till", "test", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -108,12 +104,38 @@ namespace ProjektPodApp
 
         private void ManageEditButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Du har klickat på ändra-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            DialogResult result = MessageBox.Show("Är du säker på att du vill ändra på podden?", "Du försöker ändra på en podd", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                //Kod för att göra ändringar till en podd
+            }
         }
 
         private void ManageRemoveButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Du har klickat på ta bort-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //MessageBox.Show("Du har klickat på ta bort-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+            DialogResult result = MessageBox.Show("Är du säker på att du vill ta bort podden från listan?", "Du försöker radera en podd", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                MessageBox.Show("Tagits bort", "Podden har tagits bort!", MessageBoxButtons.OK);
+                //MessageBox.Show($"Podden {PoddNamn} har tagitsbort", "Podden har tagits bort!", MessageBoxButtons.OK);
+            }
+            else if (result == DialogResult.No)
+            {
+                MessageBox.Show("Är du säker på att du inte vill ta bort podden?", "Är du verkligen säker på att den inte ska bort?", MessageBoxButtons.YesNo);
+
+                while (result == DialogResult.Yes)
+                {
+                    MessageBox.Show("Är du säker på att du inte vill ta bort podden?", "Är du verkligen säker på att den inte ska bort?", MessageBoxButtons.YesNo);
+                }
+                while (result == DialogResult.No)
+                {
+                    MessageBox.Show("Är du säker på att du inte vill ta bort podden?", "Är du verkligen säker på att den inte ska bort?", MessageBoxButtons.YesNo);
+                }
+            }
         }
 
         private void ManageRSSTextBox_TextChanged(object sender, EventArgs e)
@@ -138,12 +160,27 @@ namespace ProjektPodApp
 
         private void CategoryEditButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Du har klickat på ändra-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            DialogResult result = MessageBox.Show("Är du säker på att du vill ändra på kategorin", "Du försöker ändra på en kategori", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                //Kod för att göra ändringar till kategorin
+            }
+
         }
 
         private void CategoryRemoveButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Du har klickat på ta bort-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //DialogResult result = MessageBox.Show($"Vill du ta bort kategorin {kategorNamn}", "Är du säker på att du vill ta bort en kategori?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            
+            DialogResult result = MessageBox.Show($"Vill du ta bort kategorin (NAMN HÄR)", "Är du säker på att du vill ta bort en kategori?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+
+            if (result == DialogResult.Yes)
+            {
+                //Kod för att ta bort en kategori
+            }
+
         }
 
         private void Form1_Load_1(object sender, EventArgs e)

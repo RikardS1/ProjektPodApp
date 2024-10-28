@@ -231,6 +231,7 @@
             // 
             // EpisodeDescTextBox
             // 
+            this.EpisodeDescTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.8F);
             this.EpisodeDescTextBox.Location = new System.Drawing.Point(722, 501);
             this.EpisodeDescTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EpisodeDescTextBox.Name = "EpisodeDescTextBox";
