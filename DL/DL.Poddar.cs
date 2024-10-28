@@ -15,7 +15,7 @@ namespace ProjecktPodApp.DL
         {
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string PoddPath = Path.Combine(desktopPath, PoddFolder);
-            PoddFil = Path.Combine(PoddPath, "Poddar.xml");
+            PoddFil = Path.Combine(PoddPath, "Pod.xml");
 
             if (!Directory.Exists(PoddPath))
             {
@@ -40,7 +40,7 @@ namespace ProjecktPodApp.DL
         public void LaggTillPoddar(Feed nyPodd)
         {
             var poddar = HamtaPoddar();
-            if (!string.IsNullOrEmpty(nyPodd.Name) && !string.IsNullOrEmpty(nyPodd.OfficielltNamn))
+            if (!string.IsNullOrEmpty(nyPodd.Name) && !string.IsNullOrEmpty(nyPodd.OfficialName))
             {
                 poddar.Add(nyPodd);
             }
@@ -55,7 +55,7 @@ namespace ProjecktPodApp.DL
         public void AndraPoddar(Feed gammalPodd, Feed nyPodd)
         {
             var poddar = HamtaPoddar();
-            int index = poddar.FindIndex(p => p.Name == gammalPodd.Name && p.OfficielltNamn == gammalPodd.OfficielltNamn);
+            int index = poddar.FindIndex(p => p.Name == gammalPodd.Name && p.OfficialName == gammalPodd.OfficialName);
             if (index != -1)
             {
                 poddar[index] = nyPodd;
@@ -71,7 +71,7 @@ namespace ProjecktPodApp.DL
         public void TaBortPoddar(Feed gammalPodd)
         {
             var poddar = HamtaPoddar();
-            int index = poddar.FindIndex(p => p.Name == gammalPodd.Name && p.OfficielltNamn == gammalPodd.OfficielltNamn);
+            int index = poddar.FindIndex(p => p.Name == gammalPodd.Name && p.OfficialName == gammalPodd.OfficialName);
             if (index != -1)
             {
                 poddar.RemoveAt(index);

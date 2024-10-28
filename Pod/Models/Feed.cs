@@ -11,15 +11,16 @@ namespace Pod.Models
     public class Feed
     {
 
-
-
         public string Name { get; set; }
-        public string OfficielltNamn { get; set; }
+        public string OfficialName { get; set; }
+        public string Category { get; set; }
+
         public Feed() { }
-        public Feed(string name, string officielltNamn)
+        public Feed(string name, string officialName, string category)
         {
             Name = name;
-            OfficielltNamn = officielltNamn;
+            OfficialName = officialName;
+            Category = category;
         }
     }
     //private string name;

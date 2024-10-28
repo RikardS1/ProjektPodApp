@@ -74,6 +74,7 @@ namespace ProjektPodApp
         {
             string rsslink = ManageRSSTextBox.Text;
             string name = ManageNameTextBox.Text;
+            string kategori = ManageCategoryComboBox.SelectedItem?.ToString();
 
             try
             {
@@ -88,19 +89,19 @@ namespace ProjektPodApp
                     return;
                 }
 
-                string officielltNamn = nameNode.InnerText;
+                string OfficialName = nameNode.InnerText;
 
                 // Skapa en ny instans av Feed för att representera podcasten
-                Feed nyPodd = new Feed(name, officielltNamn);
+                Feed nyPodd = new Feed(name, OfficialName, kategori);
 
                 // Lägg till Feed-objektet i poddarManager
                 poddarManager.LaggTillPoddar(nyPodd);
 
                 // Lägg till i DataGridView
                 int rowIndex = ManageDataGridView.Rows.Add();
-                ManageDataGridView.Rows[rowIndex].Cells[0].Value = name;
-                ManageDataGridView.Rows[rowIndex].Cells[1].Value = officielltNamn;
-
+                ManageDataGridView.Rows[rowIndex].Cells[0].Value = nyPodd.Name;
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = nyPodd.OfficialName;
+                ManageDataGridView.Rows[rowIndex].Cells[2].Value = nyPodd.Category;
                 MessageBox.Show("Podden har lagts till", "test", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -257,7 +258,8 @@ namespace ProjektPodApp
             {
                 int rowIndex = ManageDataGridView.Rows.Add(); // Lägg till en ny rad
                 ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.Name; // Fyll i Namn
-                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficielltNamn; // Fyll i Officiellt namn
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficialName; // Fyll i Officiellt namn
+                ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.Category;
             }
         }
 
