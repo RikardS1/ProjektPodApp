@@ -95,7 +95,13 @@ namespace ProjecktPodApp.DL
             if (index != -1)
             {
                 kategorier.RemoveAt(index);
-            } //lägg till kod för xml och serialisera, se chat. men ev gör interface av det
+            }
+            XmlSerializer serializer = new XmlSerializer(typeof(List<string>));
+
+            using (FileStream fs = new FileStream(KategoriFil, FileMode.Create))
+            {
+                serializer.Serialize(fs, kategorier);
+            }
         }
     }
 }

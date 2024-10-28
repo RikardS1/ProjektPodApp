@@ -190,8 +190,8 @@ namespace ProjektPodApp
         }
         private void CategoryEditButton_Click(object sender, EventArgs e)
         {
-            string gammalKategori = CategoryCurrent.SelectedItem?.ToString(); // Hämta den valda kategorin
-            string nyKategori = CategoryManageTextBox.Text.Trim(); // Hämta det nya namnet
+            string gammalKategori = CategoryCurrent.SelectedItem?.ToString(); 
+            string nyKategori = CategoryManageTextBox.Text.Trim(); 
 
             if (!string.IsNullOrEmpty(gammalKategori) && !string.IsNullOrEmpty(nyKategori))
             {
@@ -203,6 +203,8 @@ namespace ProjektPodApp
                 }
                 kategoriManager.AndraKategori(gammalKategori, nyKategori); // Anropa metoden i BLL-lagret
                 listBoxKategori(); // Uppdatera listboxen
+                FyllKategoriComboBox(); 
+                FiltreraKategorierComboBox();
                 CategoryManageTextBox.Clear(); // Rensa textfältet
             }
             else
@@ -215,15 +217,28 @@ namespace ProjektPodApp
 
         private void CategoryRemoveButton_Click(object sender, EventArgs e)
         {
-            //DialogResult result = MessageBox.Show($"Vill du ta bort kategorin {kategorNamn}", "Är du säker på att du vill ta bort en kategori?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            
-            DialogResult result = MessageBox.Show($"Vill du ta bort kategorin (NAMN HÄR)", "Är du säker på att du vill ta bort en kategori?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            string gammalKategori = CategoryCurrent.SelectedItem?.ToString(); // Hämta den valda kategorin
 
-
-            if (result == DialogResult.Yes)
+            if (!string.IsNullOrEmpty(gammalKategori))
             {
-                //Kod för att ta bort en kategori
+                DialogResult result = MessageBox.Show($"Vill du ta bort kategorin (NAMN HÄR)", "Är du säker på att du vill ta bort en kategori?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+
+                if (result == DialogResult.Yes)
+                {
+                    //Kod för att ta bort en kategori
+                }
+                kategoriManager.TaBortKategori(gammalKategori); // Anropa borttagningsmetoden i BLL-lagret
+                listBoxKategori(); // Uppdatera listan efter borttagning
+                FyllKategoriComboBox(); // Uppdatera ComboBox med kategorier
+                FiltreraKategorierComboBox(); // Uppdatera filter-ComboBox
             }
+            else
+            {
+                MessageBox.Show("Vänligen välj en kategori att ta bort.");
+            }
+
+            
 
         }
 
