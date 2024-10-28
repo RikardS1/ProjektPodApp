@@ -28,8 +28,9 @@ namespace ProjektPodApp
             InitializeComponent();
             kategoriManager = new KategoriManager();
             FyllKategoriComboBox(); //metod som fyller comboboxen med kategorier - se metodkropp längre ner
-            //listBoxRedigeraKategorierFyll();
+            FiltreraKategorierComboBox();
             FyllDataGridViewMedPoddar();
+            listBoxKategori();
 
         }
 
@@ -162,17 +163,53 @@ namespace ProjektPodApp
         }
         private void CategoryAddButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Du har klickat på lägg till-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+            string nyKategori = CategoryManageTextBox.Text.Trim(); //trim tar bort oönskade mellanslag 
+            if (!string.IsNullOrEmpty(nyKategori))
+            {
+                kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
+                listBoxKategori(); //fyller listboxen igen för att se den nya kategorin
+                CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
+            }
 
+            else
+            {
+                MessageBox.Show("Ange en kategori.");
+            }
+        }
+        private void FiltreraKategorierComboBox() //metod som filtrerar kategoirer. Använder samma metoder i BLL som FyllKategoriComboBox gör.
+        {
+            List<string> kategorier = kategoriManager.HamtaKategorier();
+            ManageFilterComboBox.Items.Clear();
+            ManageFilterComboBox.Items.AddRange(kategorier.ToArray());
+        }
+        private void listBoxKategori()
+        {
+            List<string> kategorier = kategoriManager.HamtaKategorier();
+            CategoryCurrent.Items.Clear();
+            CategoryCurrent.Items.AddRange(kategorier.ToArray());
+        }
         private void CategoryEditButton_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Är du säker på att du vill ändra på kategorin", "Du försöker ändra på en kategori", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            string gammalKategori = CategoryCurrent.SelectedItem?.ToString(); // Hämta den valda kategorin
+            string nyKategori = CategoryManageTextBox.Text.Trim(); // Hämta det nya namnet
 
-            if (result == DialogResult.Yes)
+            if (!string.IsNullOrEmpty(gammalKategori) && !string.IsNullOrEmpty(nyKategori))
             {
-                //Kod för att göra ändringar till kategorin
+                DialogResult result = MessageBox.Show("Är du säker på att du vill ändra på kategorin", "Du försöker ändra på en kategori", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    //Kod för att göra ändringar till kategorin
+                }
+                kategoriManager.AndraKategori(gammalKategori, nyKategori); // Anropa metoden i BLL-lagret
+                listBoxKategori(); // Uppdatera listboxen
+                CategoryManageTextBox.Clear(); // Rensa textfältet
             }
+            else
+            {
+                MessageBox.Show("Vänligen välj en kategori och ange ett nytt namn.");
+            }
+            
 
         }
 
@@ -209,5 +246,9 @@ namespace ProjektPodApp
             }
         }
 
+        private void CategoryCurrent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
