@@ -167,9 +167,15 @@ namespace ProjektPodApp
             string nyKategori = CategoryManageTextBox.Text.Trim(); //trim tar bort oönskade mellanslag 
             if (!string.IsNullOrEmpty(nyKategori))
             {
+                Validering validering = new Validering();
+                bool check = validering.ValidateText(nyKategori, 1, 20, false);
+                if(check)
+                {
+
                 kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
                 listBoxKategori(); //fyller listboxen igen för att se den nya kategorin
                 CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
+                }
             }
 
             else

@@ -16,7 +16,7 @@ namespace BL
 
         }
         //om true - låt användaren skapa ny kategori
-        public bool ValidateNewCategory(string newCategory) 
+        public static bool ValidateNewCategory(string newCategory) 
         {
             try
             {
