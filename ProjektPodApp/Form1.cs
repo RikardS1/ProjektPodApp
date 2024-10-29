@@ -76,6 +76,11 @@ namespace ProjektPodApp
             string name = ManageNameTextBox.Text;
             string kategori = ManageCategoryComboBox.SelectedItem?.ToString();
 
+            Validering urlValidering = new Validering();
+            bool checkURL = urlValidering.ValidateRSS(rsslink);
+            if(checkURL)
+            {
+
             try
             {
                 XmlDocument rssDoc = new XmlDocument();
@@ -107,6 +112,10 @@ namespace ProjektPodApp
             catch (Exception ex)
             {
                 MessageBox.Show($"Fel vid bearbetning av RSS: {ex.Message}", "Kunde inte bearbeta RSS-strömmen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            } else
+            {
+                MessageBox.Show("Felaktig RSS-länk.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
