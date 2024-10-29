@@ -115,15 +115,15 @@ namespace ProjektPodApp
         {
             if (ManageDataGridView.SelectedRows.Count > 0)
             {
-                // Get the old podcast details from the selected row
+                
                 string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
                 string newName = ManageNameTextBox.Text.Trim();
                 string newCategory = ManageCategoryComboBox.SelectedItem?.ToString();
 
-                // Ensure both the new name and new category are provided
+               
                 if (!string.IsNullOrEmpty(newName) && !string.IsNullOrEmpty(newCategory))
                 {
-                    DialogResult result = MessageBox.Show("Are you sure you want to edit the selected podcast?",
+                    DialogResult result = MessageBox.Show("Är du säkert att ändra namn och kategori",
                                                           "Editing a Podcast", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (result == DialogResult.Yes)
@@ -132,33 +132,31 @@ namespace ProjektPodApp
                         Feed oldPodcast = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == oldName);
 
                         if (oldPodcast != null)
+                            
                         {
-                            // Create a new Feed instance with updated details
                             Feed updatedPodcast = new Feed(newName, oldPodcast.OfficialName, newCategory);
 
-                            // Update the podcast using the AndraPoddar method in poddarManager
                             poddarManager.AndraPoddar(oldPodcast, updatedPodcast);
 
-                            // Reflect changes in the DataGridView
                             ManageDataGridView.SelectedRows[0].Cells[0].Value = updatedPodcast.Name;
                             ManageDataGridView.SelectedRows[0].Cells[2].Value = updatedPodcast.Category;
 
-                            MessageBox.Show("The podcast has been successfully updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Uppdatering lyckades.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("The selected podcast could not be found in the data source.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Finns inget data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please provide a new name and category for the podcast.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("vänligen välj ett nytt namn.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("Please select a podcast from the list to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Välj en pod som du vill ändra.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
