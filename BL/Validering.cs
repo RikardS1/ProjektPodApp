@@ -20,9 +20,9 @@ namespace BL
         {
             try
             {
-                XDocument document = XDocument.Load("data.xml");
+                XDocument document = XDocument.Load("Pod.xml"); //kolla så att patch och descendants stämmer vid namn
                 string checkOK = newCategory;
-                var categoryExists = document.Descendants("category").Any(x => (string)x.Attribute("name") == checkOK);
+                var categoryExists = document.Descendants("kategori").Any(x => (string)x.Attribute("name") == checkOK);
                 if (categoryExists)
                 {
                     return false;
