@@ -220,26 +220,24 @@ namespace ProjektPodApp
                 bool finnsInte = valideraFinnsRedan.ValidateNewCategory(nyKategori);
                 if(finnsInte)
                 {
-
-                Validering valideraTecken = new Validering();
-                bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
-                if(check)
-                {
-
-                kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
-                listBoxKategori(); //fyller listboxen igen för att se den nya kategorin
-                CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
-                }
+                    Validering valideraTecken = new Validering();
+                    bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
+                    if(check)
+                    {
+                        kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
+                        listBoxKategori(); //fyller listboxen igen för att se den nya kategorin
+                        CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ange en valid kategori.");
+                    }
+                } 
                 else
-                {
-                    MessageBox.Show("Ange en valid kategori.");
-                }
-            } else
                 {
                     MessageBox.Show("Kategori med samma namn finns redan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                }
+            }
             else
             {
                 MessageBox.Show("Ange en kategori.");
