@@ -72,7 +72,20 @@ namespace ProjektPodApp.BL
         {
             PodDataAccess.AndraPoddar(gammalPoddar, nyPoddar);
         }
+        public void TaBortPodd(Feed podcast)
+        {
+            poddarLista.Remove(podcast);
 
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(xmlFilePath);
+
+            XmlNode podcastNode = xmlDoc.SelectSingleNode($"/Podcasts/Podcast[Name='{podcast.Name}']");
+            if (podcastNode != null)
+            {
+                podcastNode.ParentNode.RemoveChild(podcastNode);
+                xmlDoc.Save(xmlFilePath);
+            }
+        }
         public void TaBortPoddar(Feed gammalPoddar)
         {
             PodDataAccess.TaBortPoddar(gammalPoddar);

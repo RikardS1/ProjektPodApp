@@ -269,29 +269,54 @@ namespace ProjektPodApp
 
         private void ManageRemoveButton_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("Du har klickat på ta bort-knappen", "test", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
-            DialogResult result = MessageBox.Show("Är du säker på att du vill ta bort podden från listan?", "Du försöker radera en podd", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (ManageDataGridView.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Tagits bort", "Podden har tagits bort!", MessageBoxButtons.OK);
-                //MessageBox.Show($"Podden {PoddNamn} har tagitsbort", "Podden har tagits bort!", MessageBoxButtons.OK);
-            }
-            else if (result == DialogResult.No)
-            {
-                MessageBox.Show("Är du säker på att du inte vill ta bort podden?", "Är du verkligen säker på att den inte ska bort?", MessageBoxButtons.YesNo);
+                string poddNamn = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
 
-                while (result == DialogResult.Yes)
+                if (!string.IsNullOrEmpty(poddNamn))
                 {
-                    MessageBox.Show("Är du säker på att du inte vill ta bort podden?", "Är du verkligen säker på att den inte ska bort?", MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show($"Är du säker på att du vill ta bort podden '{poddNamn}'?", "Bekräfta borttagning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // 1. Ta bort podden från poddarManager
+                        Feed podcastAttTaBort = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == poddNamn);
+                        if (podcastAttTaBort != null)
+                        {
+                            poddarManager.TaBortPodd(podcastAttTaBort);
+                        }
+
+                        // 2. Ta bort podden från XML-filen
+                        TaBortPodcastFrånXml(poddNamn);
+
+                        // 3. Ta bort podden från DataGridView
+                        ManageDataGridView.Rows.RemoveAt(ManageDataGridView.SelectedRows[0].Index);
+
+                        MessageBox.Show($"Podcast '{poddNamn}' har tagits bort.", "Borttagning lyckades", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-                while (result == DialogResult.No)
+                else
                 {
-                    MessageBox.Show("Är du säker på att du inte vill ta bort podden?", "Är du verkligen säker på att den inte ska bort?", MessageBoxButtons.YesNo);
+                    MessageBox.Show("Vänligen välj en podd att ta bort.", "Ingen podd vald", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
+
+        private void TaBortPodcastFrånXml(string poddNamn)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFilePath);
+
+            XmlNode rootNode = doc.DocumentElement;
+            XmlNode poddNode = rootNode.SelectSingleNode($"Podcast[Name='{poddNamn}']");
+
+            if (poddNode != null)
+            {
+                rootNode.RemoveChild(poddNode);
+                doc.Save(xmlFilePath);
+            }
+        }
+
 
         private void ManageRSSTextBox_TextChanged(object sender, EventArgs e)
         {
