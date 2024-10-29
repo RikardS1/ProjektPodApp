@@ -216,8 +216,13 @@ namespace ProjektPodApp
             string nyKategori = CategoryManageTextBox.Text.Trim(); //trim tar bort oönskade mellanslag 
             if (!string.IsNullOrEmpty(nyKategori))
             {
-                Validering validering = new Validering();
-                bool check = validering.ValidateText(nyKategori, 1, 20, false);
+                Validering valideraFinnsRedan = new Validering();
+                bool finnsInte = valideraFinnsRedan.ValidateNewCategory(nyKategori);
+                if(finnsInte)
+                {
+
+                Validering valideraTecken = new Validering();
+                bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
                 if(check)
                 {
 
@@ -229,8 +234,12 @@ namespace ProjektPodApp
                 {
                     MessageBox.Show("Ange en valid kategori.");
                 }
-            }
+            } else
+                {
+                    MessageBox.Show("Kategori med samma namn finns redan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
+                }
             else
             {
                 MessageBox.Show("Ange en kategori.");
