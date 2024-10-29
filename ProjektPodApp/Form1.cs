@@ -113,12 +113,54 @@ namespace ProjektPodApp
 
         private void ManageEditButton_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Är du säker på att du vill ändra på podden?", "Du försöker ändra på en podd", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (ManageDataGridView.SelectedRows.Count > 0)
             {
-                //Kod för att göra ändringar till en podd
+                // Get the old podcast details from the selected row
+                string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
+                string newName = ManageNameTextBox.Text.Trim();
+                string newCategory = ManageCategoryComboBox.SelectedItem?.ToString();
+
+                // Ensure both the new name and new category are provided
+                if (!string.IsNullOrEmpty(newName) && !string.IsNullOrEmpty(newCategory))
+                {
+                    DialogResult result = MessageBox.Show("Are you sure you want to edit the selected podcast?",
+                                                          "Editing a Podcast", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // Find the existing podcast by its name
+                        Feed oldPodcast = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == oldName);
+
+                        if (oldPodcast != null)
+                        {
+                            // Create a new Feed instance with updated details
+                            Feed updatedPodcast = new Feed(newName, oldPodcast.OfficialName, newCategory);
+
+                            // Update the podcast using the AndraPoddar method in poddarManager
+                            poddarManager.AndraPoddar(oldPodcast, updatedPodcast);
+
+                            // Reflect changes in the DataGridView
+                            ManageDataGridView.SelectedRows[0].Cells[0].Value = updatedPodcast.Name;
+                            ManageDataGridView.SelectedRows[0].Cells[2].Value = updatedPodcast.Category;
+
+                            MessageBox.Show("The podcast has been successfully updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("The selected podcast could not be found in the data source.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please provide a new name and category for the podcast.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
+            else
+            {
+                MessageBox.Show("Please select a podcast from the list to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         private void ManageRemoveButton_Click(object sender, EventArgs e)
