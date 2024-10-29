@@ -218,6 +218,10 @@ namespace ProjektPodApp
                 listBoxKategori(); //fyller listboxen igen för att se den nya kategorin
                 CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
                 }
+                else
+                {
+                    MessageBox.Show("Ange en valid kategori.");
+                }
             }
 
             else
