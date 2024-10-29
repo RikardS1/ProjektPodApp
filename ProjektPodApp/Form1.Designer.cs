@@ -146,6 +146,7 @@
             this.ManageDataGridView.Size = new System.Drawing.Size(503, 430);
             this.ManageDataGridView.TabIndex = 7;
             this.ManageDataGridView.Tag = "";
+            this.ManageDataGridView.SelectionChanged += new System.EventHandler(this.ManageDataGridView_SelectionChanged);
             // 
             // NameColumn
             // 

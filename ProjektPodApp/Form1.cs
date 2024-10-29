@@ -489,5 +489,19 @@ namespace ProjektPodApp
                 }
             }
         }
+
+        private void ManageDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            var manager = new PoddarManager(); //Anropar konstruktorn PoddarManager, så att vi kommer åt metoden manager.HamtaPoddar()
+            var i = ManageDataGridView.CurrentCell.RowIndex; //Hämtar index från vår gridview.
+            var feeds = manager.HamtaPoddar(); // Anropar metoden HamtaPoddar().
+            var avsnitt = feeds[i].Episodes; // Index från gridview för att hämta rätt podd-avsnitt.
+            foreach(var episod in avsnitt) // Loopar igenom alla episoder i avsnitt.
+            {
+                EpisodeListBox.Items.Add($"{episod.Title}"); // Lägger till titlarna för varje episod från podden.
+            }
+            
+                
+        }
     }
 }

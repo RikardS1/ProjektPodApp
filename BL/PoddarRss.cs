@@ -17,11 +17,9 @@ namespace ProjektPodApp.BL
         private string xmlFilePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
         "Podd",
-        "savedxml.xml" //placeholder
-    );
-    
-    private PodDataAccess PodDataAccess;
-    private List<Feed> poddarLista = new List<Feed>();
+        "savedxml.xml"); //placeholder
+            private PodDataAccess PodDataAccess;
+        private List<Feed> poddarLista = new List<Feed>();
 
         public PoddarManager()
         {
@@ -80,5 +78,8 @@ namespace ProjektPodApp.BL
             PodDataAccess.TaBortPoddar(gammalPoddar);
         }
     }
+    
+    
+    
 }
 
