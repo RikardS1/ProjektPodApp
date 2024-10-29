@@ -40,6 +40,22 @@ namespace BL
             }
         }
 
+        //kollar om längden på kategorinamnet är OK
+        public bool ValidateText(string input, int minLength, int maxLength, bool allowSpecialCharacters = true)
+        {
+            if (input.Length < minLength || input.Length > maxLength)
+            {
+                return false;
+            }
+
+            if (!allowSpecialCharacters && input.Any(ch => !char.IsLetterOrDigit(ch)))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         //validera RSS URL - returnar true om det är en valid RSS URL
         public bool ValidateRSS(string feedUrl)
         {
