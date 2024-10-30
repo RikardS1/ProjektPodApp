@@ -94,6 +94,7 @@ namespace ProjektPodApp
                     // Använd WebClient för att hämta RSS-strömmen asynkront
                     using (WebClient client = new WebClient())
                     {
+                        client.Encoding = Encoding.UTF8;
                         string response = await client.DownloadStringTaskAsync(rsslink); // Endast ett await här
 
                         XmlDocument rssDoc = new XmlDocument();
