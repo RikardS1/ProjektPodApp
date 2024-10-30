@@ -518,23 +518,39 @@ namespace ProjektPodApp
 
         private void ManageDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var manager = new PoddarManager(); //Anropar konstruktorn PoddarManager, så att vi kommer åt metoden manager.HamtaPoddar()
-            var i = ManageDataGridView.CurrentCell.RowIndex; //Hämtar index från vår gridview.
-            var feeds = manager.HamtaPoddar(); // Anropar metoden HamtaPoddar().
-            if (i >= 0 && i < feeds.Count) //denna fixar OutOfRangeException (Index blev mindre än 0 om man valde vissa element)
+            try
             {
-                var avsnitt = feeds[i].Episodes;
-                foreach (var episod in avsnitt) 
+                var manager = new PoddarManager();
+
+                if (ManageDataGridView.CurrentCell == null) // Check if there is a selected cell
+                    return;
+
+                var i = ManageDataGridView.CurrentCell.RowIndex;
+                var feeds = manager.HamtaPoddar();
+
+                // Ensure index is within bounds
+                if (i >= 0 && i < feeds.Count)
                 {
-                    EpisodeListBox.Items.Add($"{episod.Title}");
+                    var avsnitt = feeds[i].Episodes ?? new List<Episode>(); // Use an empty list if Episodes is null
+
+                    EpisodeListBox.Items.Clear(); // Clear previous items before adding new ones
+
+                    foreach (var episod in avsnitt)
+                    {
+                        EpisodeListBox.Items.Add($"{episod.Title}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vald Podd är out of range för index!", "Error: Out of bounds", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (NullReferenceException ex)
             {
-                MessageBox.Show("Vald Podd är out of range för index!", "Error: Out of bounds", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("En NullReferenceException inträffade: " + ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
 
         private void EpisodeListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
