@@ -344,7 +344,7 @@ namespace ProjektPodApp
             {
                 Validering valideraFinnsRedan = new Validering();
                 bool finnsInte = valideraFinnsRedan.ValidateNewCategory(nyKategori);
-                if(!finnsInte)
+                if(finnsInte)
                 {
                     Validering valideraTecken = new Validering();
                     bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
