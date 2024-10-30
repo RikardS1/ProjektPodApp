@@ -138,65 +138,6 @@ namespace ProjektPodApp
         }
 
 
-        //private void ManageAddButton_Click(object sender, EventArgs e)
-        //{
-        //    string rsslink = ManageRSSTextBox.Text;
-        //    string name = ManageNameTextBox.Text;
-        //    string kategori = ManageCategoryComboBox.SelectedItem?.ToString();
-
-        //    Validering urlValidering = new Validering();
-        //    bool checkURL = urlValidering.ValidateRSS(rsslink);
-
-        //    if (checkURL)
-        //    {
-        //        try
-        //        {
-        //            XmlDocument rssDoc = new XmlDocument();
-        //            rssDoc.Load(rsslink);
-
-        //            XmlNode nameNode = rssDoc.SelectSingleNode("//channel/title");
-
-        //            if (nameNode == null)
-        //            {
-        //                MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //                return;
-        //            }
-
-        //            string OfficialName = nameNode.InnerText;
-
-        //            var episodes = ParseEpisodes(rssDoc);
-
-        //            Feed nyPodd = new Feed(name, OfficialName, kategori, episodes);
-
-        //            poddarManager.LaggTillPoddar(nyPodd);
-
-        //            //data add till dataGridView
-        //            int rowIndex = ManageDataGridView.Rows.Add();
-        //            ManageDataGridView.Rows[rowIndex].Cells[0].Value = nyPodd.Name;
-        //            ManageDataGridView.Rows[rowIndex].Cells[1].Value = nyPodd.OfficialName;
-        //            ManageDataGridView.Rows[rowIndex].Cells[2].Value = nyPodd.Category;
-
-        //            //anropa write methoden
-        //            AddPodcastToXml(nyPodd);
-
-        //            //Tömmer textrutorna så att man kan skriva in en ny pod direkt
-        //            ManageRSSTextBox.Clear();
-        //            ManageNameTextBox.Clear();
-        //            ManageCategoryComboBox.SelectedIndex = -1;
-
-        //            MessageBox.Show("Podden har lagts till", "test", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show($"Fel vid bearbetning av RSS: {ex.Message}", "Kunde inte bearbeta RSS-strömmen", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Felaktig RSS-länk.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
         //parsa episoder methoden
         private List<Episode> ParseEpisodes(XmlDocument rssDoc)
         {
