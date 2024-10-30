@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace ProjektPodApp
@@ -140,7 +141,11 @@ namespace ProjektPodApp
             foreach (XmlNode item in items)
             {
                 string title = item.SelectSingleNode("title")?.InnerText ?? "Untitled";
+
+                //description och ta bort <tags> med Regex B)
                 string description = item.SelectSingleNode("description")?.InnerText ?? "No description";
+                description = Regex.Replace(description, "<.*?>", string.Empty);
+
                 DateTime pubDate = DateTime.TryParse(item.SelectSingleNode("pubDate")?.InnerText, out DateTime parsedDate)
                     ? parsedDate : DateTime.MinValue;
 
@@ -465,19 +470,18 @@ namespace ProjektPodApp
         {
             if (ManageDataGridView.SelectedRows.Count > 0)
             {
-                // Hämta namnet på den valda podcasten
+                //hämta name
                 string podcastName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
 
-                // Kontrollera om podcastName inte är null
                 if (!string.IsNullOrEmpty(podcastName))
                 {
-                    // Hämta episoderna för den valda podcasten
+                    //hämta episoderna för den valda podcasten
                     var episodes = poddarManager.HamtaEpisoder(podcastName);
 
-                    // Rensa EpisodeListBox innan den fylls med nya episoder
+                    //rensa EpisodeListBox innan den fylls med nya episoder
                     EpisodeListBox.Items.Clear();
 
-                    // Lägg till varje episod i EpisodeListBox
+                    //lägg till varje episod i EpisodeListBox
                     foreach (var episode in episodes)
                     {
                         EpisodeListBox.Items.Add(episode.Title);
@@ -487,17 +491,15 @@ namespace ProjektPodApp
         }
         private void EnsureXmlFileExists()
         {
-            // Ensure the directory exists
+            //kolla om dir finns
             string directoryPath = Path.GetDirectoryName(xmlFilePath);
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
             }
 
-            // Create the file if it doesn't exist
             if (!File.Exists(xmlFilePath))
             {
-                // Create a basic XML structure
                 using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
                 {
                     writer.WriteStartDocument();
@@ -527,5 +529,35 @@ namespace ProjektPodApp
             }
 
         }
+
+        private void EpisodeListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (EpisodeListBox.SelectedItem != null)
+            {
+                // Hämta den valda episodens titel
+                string selectedEpisodeTitle = EpisodeListBox.SelectedItem.ToString();
+
+                // Hämta podden som är markerad i DataGridView
+                if (ManageDataGridView.SelectedRows.Count > 0)
+                {
+                    string selectedPodcastName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
+
+                    // Hämta avsnittet med hjälp av poddarManager
+                    var episodes = poddarManager.HamtaEpisoder(selectedPodcastName);
+                    var selectedEpisode = episodes.FirstOrDefault(ep => ep.Title == selectedEpisodeTitle);
+
+                    // Visa beskrivningen i EpisodeDescTextBox
+                    if (selectedEpisode != null)
+                    {
+                        EpisodeDescTextBox.Text = selectedEpisode.Description;
+                    }
+                    else
+                    {
+                        EpisodeDescTextBox.Text = "Ingen beskrivning tillgänglig.";
+                    }
+                }
+            }
+        }
+
     }
 }

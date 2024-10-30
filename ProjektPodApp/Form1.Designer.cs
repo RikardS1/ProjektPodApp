@@ -59,6 +59,8 @@
             this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ManageDataGridView)).BeginInit();
             this.SuspendLayout();
+            this.EpisodeListBox.SelectedIndexChanged += new System.EventHandler(this.EpisodeListBox_SelectedIndexChanged);
+
             // 
             // label1
             // 
@@ -240,6 +242,7 @@
             this.EpisodeListBox.Name = "EpisodeListBox";
             this.EpisodeListBox.Size = new System.Drawing.Size(263, 204);
             this.EpisodeListBox.TabIndex = 13;
+            this.EpisodeListBox.SelectedIndexChanged += new System.EventHandler(this.EpisodeListBox_SelectedIndexChanged);
             // 
             // EpisodeDescTextBox
             // 
