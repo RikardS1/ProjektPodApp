@@ -103,22 +103,19 @@ namespace ProjektPodApp
 
                     string OfficialName = nameNode.InnerText;
 
-                    // Parse Episodes
                     var episodes = ParseEpisodes(rssDoc);
 
-                    // Skapa en ny instans av Feed för att representera podcasten
                     Feed nyPodd = new Feed(name, OfficialName, kategori, episodes);
 
-                    // Lägg till Feed-objektet i poddarManager
                     poddarManager.LaggTillPoddar(nyPodd);
 
-                    // Lägg till i DataGridView
+                    //data add till dataGridView
                     int rowIndex = ManageDataGridView.Rows.Add();
                     ManageDataGridView.Rows[rowIndex].Cells[0].Value = nyPodd.Name;
                     ManageDataGridView.Rows[rowIndex].Cells[1].Value = nyPodd.OfficialName;
                     ManageDataGridView.Rows[rowIndex].Cells[2].Value = nyPodd.Category;
 
-                    // Save the podcast data with episodes to the XML file
+                    //anropa write methoden
                     AddPodcastToXml(nyPodd);
 
                     MessageBox.Show("Podden har lagts till", "test", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -134,7 +131,7 @@ namespace ProjektPodApp
             }
         }
 
-        // New method to parse episodes
+        //parsa episoder methoden
         private List<Episode> ParseEpisodes(XmlDocument rssDoc)
         {
             List<Episode> episodes = new List<Episode>();
@@ -153,12 +150,11 @@ namespace ProjektPodApp
             return episodes;
         }
 
-        // Modified AddPodcastToXml to include episodes
+        //skriver till .xml
         private void AddPodcastToXml(Feed podcast)
         {
             XmlDocument doc = new XmlDocument();
 
-            // Check if the file exists; if not, create it with a root element
             if (!File.Exists(xmlFilePath))
             {
                 XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
@@ -171,10 +167,8 @@ namespace ProjektPodApp
             doc.Load(xmlFilePath);
             XmlNode rootNode = doc.DocumentElement;
 
-            // Create podcast element
             XmlElement podcastElement = doc.CreateElement("Podcast");
 
-            // Podcast attributes
             XmlElement nameElement = doc.CreateElement("Name");
             nameElement.InnerText = podcast.Name;
             podcastElement.AppendChild(nameElement);
@@ -187,7 +181,6 @@ namespace ProjektPodApp
             categoryElement.InnerText = podcast.Category;
             podcastElement.AppendChild(categoryElement);
 
-            // Episodes
             XmlElement episodesElement = doc.CreateElement("Episodes");
 
             foreach (var episode in podcast.Episodes)
@@ -212,7 +205,7 @@ namespace ProjektPodApp
             podcastElement.AppendChild(episodesElement);
             rootNode.AppendChild(podcastElement);
 
-            // Save to file
+
             doc.Save(xmlFilePath);
         }
 
@@ -222,8 +215,8 @@ namespace ProjektPodApp
             if (ManageDataGridView.SelectedRows.Count > 0)
             {
                 
-                string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
-                string newName = ManageNameTextBox.Text.Trim();
+                string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString(); // origo selected
+                string newName = ManageNameTextBox.Text.Trim();                                 // sigma
                 string newCategory = ManageCategoryComboBox.SelectedItem?.ToString();
 
                
@@ -234,7 +227,7 @@ namespace ProjektPodApp
 
                     if (result == DialogResult.Yes)
                     {
-                        // Find the existing podcast by its name
+                        //hitta existerande podcast med namn
                         Feed oldPodcast = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == oldName);
 
                         if (oldPodcast != null)
@@ -279,17 +272,17 @@ namespace ProjektPodApp
 
                     if (result == DialogResult.Yes)
                     {
-                        // 1. Ta bort podden från poddarManager
+                        //1. ta bort podden från poddarManager
                         Feed podcastAttTaBort = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == poddNamn);
                         if (podcastAttTaBort != null)
                         {
                             poddarManager.TaBortPodd(podcastAttTaBort);
                         }
 
-                        // 2. Ta bort podden från XML-filen
+                        //2. ta bort podden från .xml-filen
                         TaBortPodcastFrånXml(poddNamn);
 
-                        // 3. Ta bort podden från DataGridView
+                        //3. ta bort podden från DataGridView
                         ManageDataGridView.Rows.RemoveAt(ManageDataGridView.SelectedRows[0].Index);
 
                         MessageBox.Show($"Podcast '{poddNamn}' har tagits bort.", "Borttagning lyckades", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -340,7 +333,7 @@ namespace ProjektPodApp
             {
                 Validering valideraFinnsRedan = new Validering();
                 bool finnsInte = valideraFinnsRedan.ValidateNewCategory(nyKategori);
-                if(finnsInte)
+                if(!finnsInte)
                 {
                     Validering valideraTecken = new Validering();
                     bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
@@ -520,13 +513,20 @@ namespace ProjektPodApp
             var manager = new PoddarManager(); //Anropar konstruktorn PoddarManager, så att vi kommer åt metoden manager.HamtaPoddar()
             var i = ManageDataGridView.CurrentCell.RowIndex; //Hämtar index från vår gridview.
             var feeds = manager.HamtaPoddar(); // Anropar metoden HamtaPoddar().
-            var avsnitt = feeds[i].Episodes; // Index från gridview för att hämta rätt podd-avsnitt.
-            foreach(var episod in avsnitt) // Loopar igenom alla episoder i avsnitt.
+            if (i >= 0 && i < feeds.Count) //denna fixar OutOfRangeException (Index blev mindre än 0 om man valde vissa element)
             {
-                EpisodeListBox.Items.Add($"{episod.Title}"); // Lägger till titlarna för varje episod från podden.
+                var avsnitt = feeds[i].Episodes;
+                foreach (var episod in avsnitt) 
+                {
+                    EpisodeListBox.Items.Add($"{episod.Title}");
+                }
             }
-            
-                
+            else
+            {
+                MessageBox.Show("Vald Podd är out of range för index!", "Error: Out of bounds", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
     }
 }
