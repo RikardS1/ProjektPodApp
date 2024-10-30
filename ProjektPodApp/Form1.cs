@@ -414,17 +414,16 @@ namespace ProjektPodApp
 
             if (!string.IsNullOrEmpty(gammalKategori))
             {
-                DialogResult result = MessageBox.Show($"Vill du ta bort kategorin (NAMN HÄR)", "Är du säker på att du vill ta bort en kategori?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show($"Vill du ta bort kategorin '{gammalKategori}'?", "Är du säker på att du vill ta bort en kategori?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
 
                 if (result == DialogResult.Yes)
                 {
-                    //Kod för att ta bort en kategori
-                }
                 kategoriManager.TaBortKategori(gammalKategori); // Anropa borttagningsmetoden i BLL-lagret
                 listBoxKategori(); // Uppdatera listan efter borttagning
                 FyllKategoriComboBox(); // Uppdatera ComboBox med kategorier
                 FiltreraKategorierComboBox(); // Uppdatera filter-ComboBox
+                }
             }
             else
             {
