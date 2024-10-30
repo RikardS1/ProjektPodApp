@@ -119,6 +119,11 @@ namespace ProjektPodApp
                     //anropa write methoden
                     AddPodcastToXml(nyPodd);
 
+                    //Tömmer textrutorna så att man kan skriva in en ny pod direkt
+                    ManageRSSTextBox.Clear();
+                    ManageNameTextBox.Clear();
+                    ManageCategoryComboBox.SelectedIndex = -1;
+
                     MessageBox.Show("Podden har lagts till", "test", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
