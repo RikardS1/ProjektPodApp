@@ -526,7 +526,6 @@ namespace ProjektPodApp
                 MessageBox.Show("Vald Podd är out of range för index!", "Error: Out of bounds", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
         }
     }
 }

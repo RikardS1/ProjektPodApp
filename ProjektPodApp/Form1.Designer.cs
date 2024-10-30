@@ -141,8 +141,10 @@
             this.ManageDataGridView.Location = new System.Drawing.Point(13, 147);
             this.ManageDataGridView.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.ManageDataGridView.Name = "ManageDataGridView";
+            this.ManageDataGridView.ReadOnly = true;
             this.ManageDataGridView.RowHeadersWidth = 51;
             this.ManageDataGridView.RowTemplate.Height = 24;
+            this.ManageDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ManageDataGridView.Size = new System.Drawing.Size(503, 430);
             this.ManageDataGridView.TabIndex = 7;
             this.ManageDataGridView.Tag = "";
@@ -394,6 +396,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.ManageDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
