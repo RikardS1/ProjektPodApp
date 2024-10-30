@@ -132,6 +132,9 @@
             // 
             // ManageDataGridView
             // 
+            this.ManageDataGridView.AllowUserToAddRows = false;
+            this.ManageDataGridView.AllowUserToDeleteRows = false;
+            this.ManageDataGridView.AllowUserToResizeRows = false;
             this.ManageDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ManageDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ManageDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -155,6 +158,7 @@
             this.NameColumn.HeaderText = "Namn";
             this.NameColumn.MinimumWidth = 8;
             this.NameColumn.Name = "NameColumn";
+            this.NameColumn.ReadOnly = true;
             this.NameColumn.Width = 150;
             // 
             // TitleColumn
@@ -162,6 +166,7 @@
             this.TitleColumn.HeaderText = "Titel";
             this.TitleColumn.MinimumWidth = 8;
             this.TitleColumn.Name = "TitleColumn";
+            this.TitleColumn.ReadOnly = true;
             this.TitleColumn.Width = 150;
             // 
             // Category
@@ -169,6 +174,7 @@
             this.Category.HeaderText = "Kategori";
             this.Category.MinimumWidth = 8;
             this.Category.Name = "Category";
+            this.Category.ReadOnly = true;
             this.Category.Width = 150;
             // 
             // ManageAddButton
