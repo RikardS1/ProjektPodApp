@@ -239,7 +239,6 @@
             this.EpisodeListBox.Location = new System.Drawing.Point(541, 149);
             this.EpisodeListBox.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.EpisodeListBox.Name = "EpisodeListBox";
-            this.EpisodeListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.EpisodeListBox.Size = new System.Drawing.Size(263, 202);
             this.EpisodeListBox.TabIndex = 13;
             this.EpisodeListBox.SelectedIndexChanged += new System.EventHandler(this.EpisodeListBox_SelectedIndexChanged);
