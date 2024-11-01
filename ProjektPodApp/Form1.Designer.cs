@@ -67,7 +67,7 @@
             this.label1.Location = new System.Drawing.Point(446, 7);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(212, 39);
+            this.label1.Size = new System.Drawing.Size(265, 51);
             this.label1.TabIndex = 0;
             this.label1.Text = "KebabCast™";
             // 
@@ -78,7 +78,7 @@
             this.label2.Location = new System.Drawing.Point(9, 46);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(166, 26);
+            this.label2.Size = new System.Drawing.Size(206, 31);
             this.label2.TabIndex = 1;
             this.label2.Text = "Lägg till poddar:";
             // 
@@ -99,7 +99,7 @@
             this.label3.Location = new System.Drawing.Point(173, 34);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 18);
+            this.label3.Size = new System.Drawing.Size(116, 22);
             this.label3.TabIndex = 3;
             this.label3.Text = "Skriv in RSS:";
             // 
@@ -118,7 +118,7 @@
             this.label4.Location = new System.Drawing.Point(11, 87);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(109, 18);
+            this.label4.Size = new System.Drawing.Size(132, 22);
             this.label4.TabIndex = 5;
             this.label4.Text = "Namn på podd:";
             // 
@@ -204,7 +204,7 @@
             this.label5.Location = new System.Drawing.Point(164, 87);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 18);
+            this.label5.Size = new System.Drawing.Size(82, 22);
             this.label5.TabIndex = 10;
             this.label5.Text = "Kategori:";
             // 
@@ -232,19 +232,21 @@
             // 
             // EpisodeListBox
             // 
-            this.EpisodeListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.8F);
+            this.EpisodeListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.EpisodeListBox.FormattingEnabled = true;
-            this.EpisodeListBox.ItemHeight = 25;
+            this.EpisodeListBox.HorizontalScrollbar = true;
+            this.EpisodeListBox.ItemHeight = 22;
             this.EpisodeListBox.Location = new System.Drawing.Point(541, 149);
             this.EpisodeListBox.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.EpisodeListBox.Name = "EpisodeListBox";
-            this.EpisodeListBox.Size = new System.Drawing.Size(263, 204);
+            this.EpisodeListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.EpisodeListBox.Size = new System.Drawing.Size(263, 202);
             this.EpisodeListBox.TabIndex = 13;
             this.EpisodeListBox.SelectedIndexChanged += new System.EventHandler(this.EpisodeListBox_SelectedIndexChanged);
             // 
             // EpisodeDescTextBox
             // 
-            this.EpisodeDescTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.8F);
+            this.EpisodeDescTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.EpisodeDescTextBox.Location = new System.Drawing.Point(541, 407);
             this.EpisodeDescTextBox.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.EpisodeDescTextBox.Name = "EpisodeDescTextBox";
@@ -259,7 +261,7 @@
             this.label6.Location = new System.Drawing.Point(539, 129);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 18);
+            this.label6.Size = new System.Drawing.Size(69, 22);
             this.label6.TabIndex = 15;
             this.label6.Text = "Avsnitt:";
             // 
@@ -269,7 +271,7 @@
             this.label7.Location = new System.Drawing.Point(539, 393);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.Size = new System.Drawing.Size(101, 15);
             this.label7.TabIndex = 16;
             this.label7.Text = "Poddbeskrivning:";
             // 
@@ -280,7 +282,7 @@
             this.label8.Location = new System.Drawing.Point(838, 129);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(134, 18);
+            this.label8.Size = new System.Drawing.Size(164, 22);
             this.label8.TabIndex = 17;
             this.label8.Text = "Hantera kategorier:";
             // 
@@ -319,7 +321,7 @@
             // 
             // RefreshButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(1060, 615);
+            this.RefreshButton.Location = new System.Drawing.Point(1048, 601);
             this.RefreshButton.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.RefreshButton.Name = "RefreshButton";
             this.RefreshButton.Size = new System.Drawing.Size(64, 29);
@@ -335,7 +337,7 @@
             this.label9.Location = new System.Drawing.Point(201, 586);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 18);
+            this.label9.Size = new System.Drawing.Size(71, 22);
             this.label9.TabIndex = 23;
             this.label9.Text = "Filtrera:";
             // 
@@ -349,7 +351,7 @@
             // 
             // CategoryCurrent
             // 
-            this.CategoryCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.8F);
+            this.CategoryCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.8F);
             this.CategoryCurrent.FormattingEnabled = true;
             this.CategoryCurrent.ItemHeight = 25;
             this.CategoryCurrent.Location = new System.Drawing.Point(841, 149);
@@ -365,7 +367,7 @@
             this.label10.Location = new System.Drawing.Point(839, 471);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(94, 13);
+            this.label10.Size = new System.Drawing.Size(108, 15);
             this.label10.TabIndex = 26;
             this.label10.Text = "Namn på kategori:";
             // 

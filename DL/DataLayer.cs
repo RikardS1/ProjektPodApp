@@ -11,9 +11,9 @@ namespace DL
 {
     public class DataLayer // om flytta serial + deserial, ta bort <T>
     {
-        public int ID { get; set; } //ha kvar pls
-        private string PlaceHolder;
+        public int ID { get; set; 
+        } //ha kvar pls
 
-    }
+        }
 
 }

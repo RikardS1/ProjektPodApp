@@ -58,6 +58,10 @@ namespace ProjektPodApp
 
             if (result == DialogResult.Yes)
             {
+                //Tömmer alla ListBoxes
+                EpisodeListBox.ClearSelected();
+                //CategoryCurrent.ClearSelected();
+
                 //Tömmer alla TextBoxes
                 ManageRSSTextBox.Clear();
                 ManageNameTextBox.Clear();
@@ -69,14 +73,10 @@ namespace ProjektPodApp
                 ManageCategoryComboBox.SelectedIndex = -1;
                 ManageFilterComboBox.SelectedIndex = -1;
 
-                //Tömmer alla ListBoxes
-                EpisodeListBox.ClearSelected();
-                CategoryCurrent.ClearSelected();
-
                 //Tömmer alla DataGridViewBoxes
-                ManageDataGridView.Rows.Clear();
+                ManageDataGridView.ClearSelection();
+                //ManageDataGridView.Rows.Clear();
             }
-            
         }
         private async void ManageAddButton_Click(object sender, EventArgs e)
         {
@@ -123,7 +123,12 @@ namespace ProjektPodApp
                         // Anropa AddPodcastToXml (synkront för att undvika ytterligare await)
                         AddPodcastToXml(nyPodd);
 
-                        MessageBox.Show("Podden har lagts till", "test", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Tömmer RSS, namn och kategori-rutorna så att man kan lägga till ny podd direkt
+                        ManageRSSTextBox.Clear();
+                        ManageNameTextBox.Clear();
+                        ManageCategoryComboBox.SelectedIndex = -1;
+
+                        MessageBox.Show("Podden har lagts till", "Allt gick som det skulle", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch (Exception ex)
@@ -446,6 +451,7 @@ namespace ProjektPodApp
             // Fyll `DataGridView` med de filtrerade poddarna
             FyllDataGridViewMedPoddar(filter);
         }
+
         private void FyllDataGridViewMedPoddar()
         {
             List<Feed> poddar = poddarManager.HamtaPoddar(); // Hämta poddar från PoddarManager
