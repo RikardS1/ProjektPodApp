@@ -79,7 +79,7 @@ namespace ProjektPodApp.BL
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(xmlFilePath);
 
-            XmlNode podcastNode = xmlDoc.SelectSingleNode($"/Podcasts/Podcast[Name='{podcast.Name}']");
+            XmlNode podcastNode = xmlDoc.SelectSingleNode($"/ArrayOfFeed/Feed[Name='{podcast.Name}']");
             if (podcastNode != null)
             {
                 podcastNode.ParentNode.RemoveChild(podcastNode);
