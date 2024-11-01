@@ -15,7 +15,7 @@ namespace ProjecktPodApp.DL
         {
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string PoddPath = Path.Combine(desktopPath, PoddFolder);
-            PoddFil = Path.Combine(PoddPath, "savedxml.xml");
+            PoddFil = Path.Combine(PoddPath, "Podd.xml");
 
             if (!Directory.Exists(PoddPath))
             {
