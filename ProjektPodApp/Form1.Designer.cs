@@ -59,6 +59,7 @@
             this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ManageDataGridView)).BeginInit();
             this.SuspendLayout();
+            this.EpisodeListBox.SelectedIndexChanged += new System.EventHandler(this.EpisodeListBox_SelectedIndexChanged);
             // 
             // label1
             // 
