@@ -561,27 +561,20 @@ namespace ProjektPodApp
         {
             if (EpisodeListBox.SelectedItem != null)
             {
-                // Hämta den valda episodens titel
+                // Get the selected episode title
                 string selectedEpisodeTitle = EpisodeListBox.SelectedItem.ToString();
 
-                // Hämta podden som är markerad i DataGridView
-                if (ManageDataGridView.SelectedRows.Count > 0)
+                // Find the selected podcast from the DataGridView selection
+                if (ManageDataGridView.CurrentCell != null)
                 {
-                    string selectedPodcastName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
+                    int rowIndex = ManageDataGridView.CurrentCell.RowIndex;
+                    var selectedPodcast = poddarManager.HamtaPoddar()[rowIndex];
 
-                    // Hämta avsnittet med hjälp av poddarManager
-                    var episodes = poddarManager.HamtaEpisoder(selectedPodcastName);
-                    var selectedEpisode = episodes.FirstOrDefault(ep => ep.Title == selectedEpisodeTitle);
+                    // Find the episode with the selected title
+                    var selectedEpisode = selectedPodcast.Episodes.FirstOrDefault(ep => ep.Title == selectedEpisodeTitle);
 
-                    // Visa beskrivningen i EpisodeDescTextBox
-                    if (selectedEpisode != null)
-                    {
-                        EpisodeDescTextBox.Text = selectedEpisode.Description;
-                    }
-                    else
-                    {
-                        EpisodeDescTextBox.Text = "Ingen beskrivning tillgänglig.";
-                    }
+                    // Set the description in EpisodeDescTextBox
+                    EpisodeDescTextBox.Text = selectedEpisode?.Description ?? "Ingen beskrivning tillgänglig";
                 }
             }
         }
