@@ -441,25 +441,23 @@ namespace ProjektPodApp
 
         private void ManageFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string valdKategori = ManageFilterComboBox.SelectedItem?.ToString(); // Hämta vald kategori
-            List<Feed> poddar = poddarManager.HamtaPoddar(); // Hämta alla poddar
+            string valdKategori = ManageFilterComboBox.SelectedItem?.ToString();
+            List<Feed> poddar = poddarManager.HamtaPoddar();
 
-            // Filtrera poddar baserat på vald kategori
             var filter = poddar.Where(pod => pod.Category.Equals(valdKategori))
                                .Select(pod => pod);
 
-            // Fyll `DataGridView` med de filtrerade poddarna
             FyllDataGridViewMedPoddar(filter);
         }
 
         private void FyllDataGridViewMedPoddar()
         {
-            List<Feed> poddar = poddarManager.HamtaPoddar(); // Hämta poddar från PoddarManager
-            ManageDataGridView.Rows.Clear(); // Töm DataGridView
+            List<Feed> poddar = poddarManager.HamtaPoddar();
+            ManageDataGridView.Rows.Clear();
 
             foreach (var podd in poddar)
             {
-                int rowIndex = ManageDataGridView.Rows.Add(); // Lägg till en ny rad
+                int rowIndex = ManageDataGridView.Rows.Add();
                 ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.Name; 
                 ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficialName; 
                 ManageDataGridView.Rows[rowIndex].Cells[2].Value = podd.Category;
@@ -467,11 +465,11 @@ namespace ProjektPodApp
         }
         private void FyllDataGridViewMedPoddar(IEnumerable<Feed> poddar)
         {
-            ManageDataGridView.Rows.Clear(); // Töm DataGridView
+            ManageDataGridView.Rows.Clear();
 
             foreach (var podd in poddar)
             {
-                int rowIndex = ManageDataGridView.Rows.Add(); // Lägg till en ny rad
+                int rowIndex = ManageDataGridView.Rows.Add();
                 ManageDataGridView.Rows[rowIndex].Cells[0].Value = podd.Name;
                 ManageDataGridView.Rows[rowIndex].Cells[1].Value = podd.OfficialName;
                 ManageDataGridView.Rows[rowIndex].Cells[2].Value = podd.Category;
@@ -527,18 +525,17 @@ namespace ProjektPodApp
             {
                 var manager = new PoddarManager();
 
-                if (ManageDataGridView.CurrentCell == null) // Check if there is a selected cell
+                if (ManageDataGridView.CurrentCell == null) 
                     return;
 
                 var i = ManageDataGridView.CurrentCell.RowIndex;
                 var feeds = manager.HamtaPoddar();
 
-                // Ensure index is within bounds
+                //index inbound
                 if (i >= 0 && i < feeds.Count)
                 {
-                    var avsnitt = feeds[i].Episodes ?? new List<Episode>(); // Use an empty list if Episodes is null
-
-                    EpisodeListBox.Items.Clear(); // Clear previous items before adding new ones
+                    var avsnitt = feeds[i].Episodes ?? new List<Episode>();
+                    EpisodeListBox.Items.Clear();
 
                     foreach (var episod in avsnitt)
                     {
@@ -561,23 +558,16 @@ namespace ProjektPodApp
         {
             if (EpisodeListBox.SelectedItem != null)
             {
-                // Get the selected episode title
                 string selectedEpisodeTitle = EpisodeListBox.SelectedItem.ToString();
-
-                // Find the selected podcast from the DataGridView selection
                 if (ManageDataGridView.CurrentCell != null)
                 {
                     int rowIndex = ManageDataGridView.CurrentCell.RowIndex;
                     var selectedPodcast = poddarManager.HamtaPoddar()[rowIndex];
-
-                    // Find the episode with the selected title
                     var selectedEpisode = selectedPodcast.Episodes.FirstOrDefault(ep => ep.Title == selectedEpisodeTitle);
 
-                    // Set the description in EpisodeDescTextBox
                     EpisodeDescTextBox.Text = selectedEpisode?.Description ?? "Ingen beskrivning tillgänglig";
                 }
             }
         }
-
     }
 }
