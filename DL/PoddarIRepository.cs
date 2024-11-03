@@ -1,4 +1,5 @@
-﻿using Pod.Models;
+﻿using DL;
+using Pod.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace ProjecktPodApp.DL
 {
-    public class PodDataAccess
+    public class PodDataAccess : IRepository<Feed>
     {
         private const string PoddFolder = "Podd";
         private string PoddFil;
@@ -23,7 +24,7 @@ namespace ProjecktPodApp.DL
             }
         }
 
-        public List<Feed> HamtaPoddar()
+        public List<Feed> HamtaAlla()
         {
             if (!File.Exists(PoddFil))
             {
@@ -37,9 +38,9 @@ namespace ProjecktPodApp.DL
             }
         }
 
-        public void LaggTillPoddar(Feed nyPodd)
+        public void LaggTill(Feed nyPodd)
         {
-            var poddar = HamtaPoddar();
+            var poddar = HamtaAlla();
             if (!string.IsNullOrEmpty(nyPodd.Name) && !string.IsNullOrEmpty(nyPodd.OfficialName))
             {
                 poddar.Add(nyPodd);
@@ -52,9 +53,9 @@ namespace ProjecktPodApp.DL
             }
         }
 
-        public void AndraPoddar(Feed gammalPodd, Feed nyPodd)
+        public void Andra(Feed gammalPodd, Feed nyPodd)
         {
-            var poddar = HamtaPoddar();
+            var poddar = HamtaAlla();
             int index = poddar.FindIndex(p => p.Name == gammalPodd.Name && p.OfficialName == gammalPodd.OfficialName);
             if (index != -1)
             {
@@ -67,10 +68,10 @@ namespace ProjecktPodApp.DL
                 serializer.Serialize(fs, poddar);
             }
         }
-        public void TaBortPoddar(Feed gammalPodd)
+        public void TaBort(Feed gammalPodd)
         {
             // Load current list of feeds from XML
-            var poddar = HamtaPoddar();
+            var poddar = HamtaAlla();
 
             // Debug: Display feeds before removal
             Console.WriteLine("Feeds before removal:");

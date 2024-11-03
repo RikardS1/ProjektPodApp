@@ -28,7 +28,7 @@ namespace ProjektPodApp.BL
 
         public List<Feed> HamtaPoddar()
         {
-            return PodDataAccess.HamtaPoddar();
+            return PodDataAccess.HamtaAlla();
         }
         public List<Episode> HamtaEpisoder(string podcastName)
         {
@@ -65,12 +65,12 @@ namespace ProjektPodApp.BL
         }
         public void LaggTillPoddar(Feed nyPoddar)
         {
-            PodDataAccess.LaggTillPoddar(nyPoddar);
+            PodDataAccess.LaggTill(nyPoddar);
         }
 
         public void AndraPoddar(Feed gammalPoddar, Feed nyPoddar)
         {
-            PodDataAccess.AndraPoddar(gammalPoddar, nyPoddar);
+            PodDataAccess.Andra(gammalPoddar, nyPoddar);
         }
         public void TaBortPodd(Feed podcast)
         {
@@ -88,7 +88,7 @@ namespace ProjektPodApp.BL
         }
         public void TaBortPoddar(Feed gammalPoddar)
         {
-            PodDataAccess.TaBortPoddar(gammalPoddar);
+            PodDataAccess.TaBort(gammalPoddar);
         }
     }
     

@@ -20,24 +20,24 @@ namespace ProjektPodApp.BL
 
         public List<string> HamtaKategorier() //metodanrop från DL
         {
-            return kategoriDataAccess.HamtaKategorier();
+            return kategoriDataAccess.HamtaAlla();
         }
 
         public void LaggTillKategori(string nyKategori)
         {
-            kategoriDataAccess.LaggTillKategori(nyKategori); //metod som lägger till nyKategori i Datalagret
+            kategoriDataAccess.LaggTill(nyKategori); //metod som lägger till nyKategori i Datalagret
         }
 
         public void AndraKategori(string gammalKategori, string nyKategori)
         {
 
-            kategoriDataAccess.AndraKategori(gammalKategori, nyKategori);
+            kategoriDataAccess.Andra(gammalKategori, nyKategori);
 
         }
 
         public void TaBortKategori(string gammalKategori)
         {
-            kategoriDataAccess.TaBortKategori(gammalKategori);
+            kategoriDataAccess.TaBort(gammalKategori);
         }
 
     }

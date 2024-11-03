@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using DL;
 
 namespace ProjecktPodApp.DL
 {
-    public class KategoriDataAccess //datalagret har här färdiga kategorier som ligger inom metoden HamtaKategorier.
+    public class KategoriDataAccess : IRepository<string> //datalagret har här färdiga kategorier som ligger inom metoden HamtaKategorier.
     {
 
         private const string KategoriFolder = "Kategorier"; //Filnamn för XML filen
@@ -32,7 +33,7 @@ namespace ProjecktPodApp.DL
 
 
 
-        public List<string> HamtaKategorier() //returnerar en lista med kategorier
+        public List<string> HamtaAlla() //returnerar en lista med kategorier
         {
             if (!File.Exists(KategoriFil))
             {
@@ -49,9 +50,9 @@ namespace ProjecktPodApp.DL
 
         }
 
-        public void LaggTillKategori(string nyKategori) //lägger till ny kategori i listan
+        public void LaggTill(string nyKategori) //lägger till ny kategori i listan
         {
-            var kategorier = HamtaKategorier();
+            var kategorier = HamtaAlla();
 
 
             if (!string.IsNullOrEmpty(nyKategori))
@@ -70,10 +71,10 @@ namespace ProjecktPodApp.DL
 
 
 
-        public void AndraKategori(string gammalKategori, string nyKategori)
+        public void Andra(string gammalKategori, string nyKategori)
 
         {
-            var kategorier = HamtaKategorier();
+            var kategorier = HamtaAlla();
             int index = kategorier.IndexOf(gammalKategori); // Räknar i listan efter gammalkategori
             if (index != -1)
             {
@@ -88,9 +89,9 @@ namespace ProjecktPodApp.DL
             }
         }
 
-        public void TaBortKategori(string gammalKategori)
+        public void TaBort(string gammalKategori)
         {
-            var kategorier = HamtaKategorier();
+            var kategorier = HamtaAlla();
             int index = kategorier.IndexOf(gammalKategori); // Räknar i listan efter gammalkategori
             if (index != -1)
             {

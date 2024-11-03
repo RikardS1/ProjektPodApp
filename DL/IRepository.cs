@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    public interface IRepository<T> where T :class
+    public interface IRepository<T>
     {
-        T GetById(int id);
-        void Create(T entity);
-        void Update(int index, T entity);
-        void Delete(T entity);
-        void SaveChanges();
+        List<T> HamtaAlla();
+        void LaggTill(T nyObjekt);
+        void Andra(T gammaltObjekt, T nyttObjekt);
+        void TaBort(T objekt);
     }
 }
