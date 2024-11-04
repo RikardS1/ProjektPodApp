@@ -531,7 +531,7 @@ namespace ProjektPodApp
                 var i = ManageDataGridView.CurrentCell.RowIndex;
                 var feeds = manager.HamtaPoddar();
 
-                //index inbound
+                //index inbounda
                 if (i >= 0 && i < feeds.Count)
                 {
                     var avsnitt = feeds[i].Episodes ?? new List<Episode>();
