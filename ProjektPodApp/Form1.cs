@@ -54,7 +54,6 @@ namespace ProjektPodApp
             if (result == DialogResult.Yes)
             {
 
-          // Rensar alla objekt
 
                 // Rensar alla TextBox-objekt
                 ManageRSSTextBox.Clear();
