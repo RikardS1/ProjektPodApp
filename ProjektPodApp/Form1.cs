@@ -53,22 +53,26 @@ namespace ProjektPodApp
 
             if (result == DialogResult.Yes)
             {
-                //Tömmer alla ListBoxes
-                EpisodeListBox.ClearSelected();
 
-                //Tömmer alla TextBoxes
+          // Rensar alla objekt
+
+                // Rensar alla TextBox-objekt
                 ManageRSSTextBox.Clear();
                 ManageNameTextBox.Clear();
                 CategoryManageTextBox.Clear();
-                //RichTextBox
+
+                // Rensar DataGridView-objekt
+                ManageDataGridView.Rows.Clear(); 
+
+                // Rensar RichTextBox
                 EpisodeDescTextBox.Clear();
 
-                //Tömmer alla ComboBoxes
+                // Rensar ComboBox-objekt
                 ManageCategoryComboBox.SelectedIndex = -1;
                 ManageFilterComboBox.SelectedIndex = -1;
+                // Rensar alla ListBox-objekt
+                EpisodeListBox.Items.Clear();
 
-                //Tömmer alla DataGridViewBoxes
-                ManageDataGridView.ClearSelection();
             }
         }
         private async void ManageAddButton_Click(object sender, EventArgs e)
