@@ -14,7 +14,7 @@ namespace ProjektPodApp.BL
     public class PoddarManager //Fungerar som mellanhand mellan DAL och gränssnitt
     {
         //desktop \Podd\ dir
-        private string xmlFilePath = Path.Combine(
+        public static string xmlFilePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
         "Podd",
         "Podd.xml"); //placeholder

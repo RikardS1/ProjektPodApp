@@ -25,12 +25,6 @@ namespace ProjektPodApp
         private XmlNodeList RssItems;
         private KategoriManager kategoriManager; //fält som refererar till BLL-lagret
         private PoddarManager poddarManager = new PoddarManager();
-    //    private string xmlFilePath = Path.Combine(
-    //    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-    //    "Podd",
-    //    "savedxml.xml"
-    //);
-
         public Form1()
         {
             
@@ -40,7 +34,7 @@ namespace ProjektPodApp
             FiltreraKategorierComboBox();
             FyllDataGridViewMedPoddar();
             listBoxKategori();
-            //EnsureXmlFileExists();
+            Validering.EnsureXmlFileExists();
 
         }
 
@@ -61,7 +55,6 @@ namespace ProjektPodApp
             {
                 //Tömmer alla ListBoxes
                 EpisodeListBox.ClearSelected();
-                //CategoryCurrent.ClearSelected();
 
                 //Tömmer alla TextBoxes
                 ManageRSSTextBox.Clear();
@@ -76,7 +69,6 @@ namespace ProjektPodApp
 
                 //Tömmer alla DataGridViewBoxes
                 ManageDataGridView.ClearSelection();
-                //ManageDataGridView.Rows.Clear();
             }
         }
         private async void ManageAddButton_Click(object sender, EventArgs e)
@@ -115,16 +107,16 @@ namespace ProjektPodApp
                         Feed nyPodd = new Feed(name, OfficialName, kategori, episodes);
                         poddarManager.LaggTillPoddar(nyPodd);
 
-                        // Lägg till data till dataGridView
+                        //lägg till data till dataGridView
                         int rowIndex = ManageDataGridView.Rows.Add();
                         ManageDataGridView.Rows[rowIndex].Cells[0].Value = nyPodd.Name;
                         ManageDataGridView.Rows[rowIndex].Cells[1].Value = nyPodd.OfficialName;
                         ManageDataGridView.Rows[rowIndex].Cells[2].Value = nyPodd.Category;
 
-                        // Anropa AddPodcastToXml (synkront för att undvika ytterligare await)
+                        //anropa AddPodcastToXml (synkront för att undvika ytterligare await)
                         poddarManager.LaggTillPoddar2(nyPodd);
 
-                        //Tömmer RSS, namn och kategori-rutorna så att man kan lägga till ny podd direkt
+                        //tömmer RSS, namn och kategori-rutorna så att man kan lägga till ny podd direkt
                         ManageRSSTextBox.Clear();
                         ManageNameTextBox.Clear();
                         ManageCategoryComboBox.SelectedIndex = -1;
@@ -142,7 +134,6 @@ namespace ProjektPodApp
                 MessageBox.Show("Felaktig RSS-länk.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         //parsa episoder methoden
         private List<Episode> ParseEpisodes(XmlDocument rssDoc)
@@ -166,66 +157,6 @@ namespace ProjektPodApp
 
             return episodes;
         }
-
-        //skriver till .xml
-        //private void AddPodcastToXml(Feed podcast)
-        //{
-        //    XmlDocument doc = new XmlDocument();
-
-        //    if (!File.Exists(xmlFilePath))
-        //    {
-        //        XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
-        //        XmlNode root = doc.CreateElement("Podcasts");
-        //        doc.AppendChild(root);
-        //        doc.InsertBefore(xmlDeclaration, root);
-        //        doc.Save(xmlFilePath);
-        //    }
-
-        //    doc.Load(xmlFilePath);
-        //    XmlNode rootNode = doc.DocumentElement;
-
-        //    XmlElement podcastElement = doc.CreateElement("Podcast");
-
-        //    XmlElement nameElement = doc.CreateElement("Name");
-        //    nameElement.InnerText = podcast.Name;
-        //    podcastElement.AppendChild(nameElement);
-
-        //    XmlElement officialNameElement = doc.CreateElement("OfficialName");
-        //    officialNameElement.InnerText = podcast.OfficialName;
-        //    podcastElement.AppendChild(officialNameElement);
-
-        //    XmlElement categoryElement = doc.CreateElement("Category");
-        //    categoryElement.InnerText = podcast.Category;
-        //    podcastElement.AppendChild(categoryElement);
-
-        //    XmlElement episodesElement = doc.CreateElement("Episodes");
-
-        //    foreach (var episode in podcast.Episodes)
-        //    {
-        //        XmlElement episodeElement = doc.CreateElement("Episode");
-
-        //        XmlElement episodeTitle = doc.CreateElement("Title");
-        //        episodeTitle.InnerText = episode.Title;
-        //        episodeElement.AppendChild(episodeTitle);
-
-        //        XmlElement episodeDescription = doc.CreateElement("Description");
-        //        episodeDescription.InnerText = episode.Description;
-        //        episodeElement.AppendChild(episodeDescription);
-
-        //        XmlElement episodePubDate = doc.CreateElement("PublishedDate");
-        //        episodePubDate.InnerText = episode.PublishedDate.ToString("yyyy-MM-dd");
-        //        episodeElement.AppendChild(episodePubDate);
-
-        //        episodesElement.AppendChild(episodeElement);
-        //    }
-
-        //    podcastElement.AppendChild(episodesElement);
-        //    rootNode.AppendChild(podcastElement);
-
-
-        //    doc.Save(xmlFilePath);
-        //}
-
 
         private void ManageEditButton_Click(object sender, EventArgs e)
         {
@@ -311,22 +242,6 @@ namespace ProjektPodApp
                 }
             }
         }
-
-        //private void TaBortPodcastFrånXml(string poddNamn)
-        //{
-        //    XmlDocument doc = new XmlDocument();
-        //    doc.Load(xmlFilePath);
-
-        //    XmlNode rootNode = doc.DocumentElement;
-        //    XmlNode poddNode = rootNode.SelectSingleNode($"Podcast[Name='{poddNamn}']");
-
-        //    if (poddNode != null)
-        //    {
-        //        rootNode.RemoveChild(poddNode);
-        //        doc.Save(xmlFilePath);
-        //    }
-        //}
-
 
         private void ManageRSSTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -489,9 +404,6 @@ namespace ProjektPodApp
                     //hämta episoderna för den valda podcasten
                     var episodes = poddarManager.HamtaEpisoder(podcastName);
 
-                    //rensa EpisodeListBox innan den fylls med nya episoder
-                    //EpisodeListBox.Items.Clear();
-
                     //lägg till varje episod i EpisodeListBox
                     foreach (var episode in episodes)
                     {
@@ -500,26 +412,6 @@ namespace ProjektPodApp
                 }
             }
         }
-        //private void EnsureXmlFileExists()
-        //{
-        //    //kolla om dir finns
-        //    string directoryPath = Path.GetDirectoryName(xmlFilePath);
-        //    if (!Directory.Exists(directoryPath))
-        //    {
-        //        Directory.CreateDirectory(directoryPath);
-        //    }
-
-        //    if (!File.Exists(xmlFilePath))
-        //    {
-        //        using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
-        //        {
-        //            writer.WriteStartDocument();
-        //            writer.WriteStartElement("Podcasts"); // Root element
-        //            writer.WriteEndElement();
-        //            writer.WriteEndDocument();
-        //        }
-        //    }
-        //}
 
         private void ManageDataGridView_SelectionChanged(object sender, EventArgs e)
         {
