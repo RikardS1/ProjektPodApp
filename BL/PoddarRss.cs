@@ -85,6 +85,7 @@ namespace ProjektPodApp.BL
                 podcastNode.ParentNode.RemoveChild(podcastNode);
                 xmlDoc.Save(xmlFilePath);
             }
+
         }
         public void TaBortPoddar(Feed gammalPoddar)
         {

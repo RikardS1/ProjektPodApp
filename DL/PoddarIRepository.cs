@@ -14,7 +14,7 @@ namespace ProjecktPodApp.DL
 
         public PodDataAccess()
         {
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);// lägger mappen i lokal dator
             string PoddPath = Path.Combine(desktopPath, PoddFolder);
             PoddFil = Path.Combine(PoddPath, "Podd.xml");
 
@@ -106,20 +106,6 @@ namespace ProjecktPodApp.DL
             }
         }
 
-        //public void TaBortPoddar(Feed gammalPodd)
-        //{
-        //    var poddar = HamtaPoddar();
-        //    int index = poddar.FindIndex(p => p.Name == gammalPodd.Name && p.OfficialName == gammalPodd.OfficialName);
-        //    if (index != -1)
-        //    {
-        //        poddar.RemoveAt(index);
-        //    }
-
-        //    XmlSerializer serializer = new XmlSerializer(typeof(List<Feed>));
-        //    using (FileStream fs = new FileStream(PoddFil, FileMode.Create))
-        //    {
-        //        serializer.Serialize(fs, poddar);
-        //    }
-        //}
+       
     }
 }
