@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ProjektPodApp.BL;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -121,6 +123,30 @@ namespace BL
                 //Exceptionhantering :D
                 Console.WriteLine($"Error validating RSS feed: {ex.Message}");
                 return false;
+            }
+        }
+        
+
+        public static void EnsureXmlFileExists()
+        {
+            //kolla om dir finns
+            
+
+            string directoryPath = PoddarManager.xmlFilePath;
+            //if (!Directory.Exists(directoryPath))
+            //{
+            //    Directory.CreateDirectory(directoryPath);
+            //}
+
+            if (!File.Exists(directoryPath))
+            {
+                using (XmlWriter writer = XmlWriter.Create(directoryPath))
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("ArrayOfFeed"); // Root element
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
             }
         }
     }
