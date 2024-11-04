@@ -20,6 +20,7 @@ namespace ProjektPodApp
 {
     public partial class Form1 : Form
     {
+        private List<Feed> filteredPodcasts = new List<Feed>();
         private XmlDocument RssDoc;
         private XmlNodeList RssItems;
         private KategoriManager kategoriManager; //fält som refererar till BLL-lagret
@@ -442,12 +443,13 @@ namespace ProjektPodApp
         private void ManageFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string valdKategori = ManageFilterComboBox.SelectedItem?.ToString();
-            List<Feed> poddar = poddarManager.HamtaPoddar();
+            List<Feed> poddar = poddarManager.HamtaPoddar(); // Hämtar alla poddar
 
-            var filter = poddar.Where(pod => pod.Category.Equals(valdKategori))
-                               .Select(pod => pod);
+            // Filtrerar våra poddar baserat på vald kategori
+            filteredPodcasts = poddar.Where(pod => pod.Category.Equals(valdKategori)).ToList();
 
-            FyllDataGridViewMedPoddar(filter);
+            // Fyller datagridview med filtrerade poddar
+            FyllDataGridViewMedPoddar(filteredPodcasts);
         }
 
         private void FyllDataGridViewMedPoddar()
@@ -521,37 +523,30 @@ namespace ProjektPodApp
 
         private void ManageDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            try
+            
+            if (ManageDataGridView.CurrentCell == null)
+                return;
+
+            int i = ManageDataGridView.CurrentCell.RowIndex;
+
+           
+            List<Feed> poddar = ManageFilterComboBox.SelectedItem == null ? poddarManager.HamtaPoddar() : filteredPodcasts;
+
+            if (i >= 0 && i < poddar.Count)
             {
-                var manager = new PoddarManager();
+                var selectedPodcast = poddar[i]; 
+                var avsnitt = selectedPodcast.Episodes ?? new List<Episode>();
+                EpisodeListBox.Items.Clear();
 
-                if (ManageDataGridView.CurrentCell == null) 
-                    return;
-
-                var i = ManageDataGridView.CurrentCell.RowIndex;
-                var feeds = manager.HamtaPoddar();
-
-                //index inbounda
-                if (i >= 0 && i < feeds.Count)
+                foreach (var episod in avsnitt)
                 {
-                    var avsnitt = feeds[i].Episodes ?? new List<Episode>();
-                    EpisodeListBox.Items.Clear();
-
-                    foreach (var episod in avsnitt)
-                    {
-                        EpisodeListBox.Items.Add($"{episod.Title}");
-                    }
+                    EpisodeListBox.Items.Add($"{episod.Title}");
                 }
-                else
-                {
-                    MessageBox.Show("Vald Podd är out of range för index!", "Error: Out of bounds", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (NullReferenceException ex)
-            {
-                MessageBox.Show("En NullReferenceException inträffade: " + ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
 
         private void EpisodeListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -559,13 +554,24 @@ namespace ProjektPodApp
             if (EpisodeListBox.SelectedItem != null)
             {
                 string selectedEpisodeTitle = EpisodeListBox.SelectedItem.ToString();
+
                 if (ManageDataGridView.CurrentCell != null)
                 {
                     int rowIndex = ManageDataGridView.CurrentCell.RowIndex;
-                    var selectedPodcast = poddarManager.HamtaPoddar()[rowIndex];
-                    var selectedEpisode = selectedPodcast.Episodes.FirstOrDefault(ep => ep.Title == selectedEpisodeTitle);
 
-                    EpisodeDescTextBox.Text = selectedEpisode?.Description ?? "Ingen beskrivning tillgänglig";
+                    List<Feed> poddar = ManageFilterComboBox.SelectedItem == null ? poddarManager.HamtaPoddar() : filteredPodcasts;
+
+                    if (rowIndex >= 0 && rowIndex < poddar.Count)
+                    {
+                        var selectedPodcast = poddar[rowIndex];
+                        var selectedEpisode = selectedPodcast.Episodes.FirstOrDefault(ep => ep.Title == selectedEpisodeTitle);
+
+                        EpisodeDescTextBox.Text = selectedEpisode?.Description ?? "Ingen beskrivning tillgänglig";
+                    }
+                    else
+                    {
+                        EpisodeDescTextBox.Text = "Ingen beskrivning tillgänglig";
+                    }
                 }
             }
         }
