@@ -488,7 +488,7 @@ namespace ProjektPodApp
                     var episodes = poddarManager.HamtaEpisoder(podcastName);
 
                     //rensa EpisodeListBox innan den fylls med nya episoder
-                    EpisodeListBox.Items.Clear();
+                    //EpisodeListBox.Items.Clear();
 
                     //lägg till varje episod i EpisodeListBox
                     foreach (var episode in episodes)
