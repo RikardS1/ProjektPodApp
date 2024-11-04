@@ -9,22 +9,22 @@ using DL;
 
 namespace ProjecktPodApp.DL
 {
-    public class KategoriDataAccess : IRepository<string> //datalagret har här färdiga kategorier som ligger inom metoden HamtaKategorier.
+    public class KategoriDataAccess : IRepository<string> 
     {
 
-        private const string KategoriFolder = "Kategorier"; //Filnamn för XML filen
+        private const string KategoriFolder = "Kategorier"; 
         private string KategoriFil;
 
         public KategoriDataAccess()
         {
-            // Hämta sökvägen till skrivbordet och kombinera med mappens namn
+            
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string kategorierPath = Path.Combine(desktopPath, KategoriFolder);
 
             // Sätt sökvägen till filen
             KategoriFil = Path.Combine(kategorierPath, "kategorier.xml");
 
-            // Kontrollera och skapa mappen om den inte finns
+            
             if (!Directory.Exists(kategorierPath))
             {
                 Directory.CreateDirectory(kategorierPath);
@@ -33,24 +33,23 @@ namespace ProjecktPodApp.DL
 
 
 
-        public List<string> HamtaAlla() //returnerar en lista med kategorier
+        public List<string> HamtaAlla() //Hämtar Kategorier
         {
             if (!File.Exists(KategoriFil))
             {
-                return new List<string> { "Humor", "Hälsa", "Utbildning", "True crime", "Historia" };
+                return new List<string> { "Humor", "Hälsa","Sport ", "Utbildning", "True crime", "Historia" ,"Musik"};
             }
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<string>)); //Skapa en xmlSerializer som hanterar listan
-
-            using (FileStream fs = new FileStream(KategoriFil, FileMode.Open)) //Öppnar xml-filen för att läsa in data
+            XmlSerializer serializer = new XmlSerializer(typeof(List<string>)); 
+            using (FileStream fs = new FileStream(KategoriFil, FileMode.Open)) 
 
             {
-                return (List<string>)serializer.Deserialize(fs); //Deseriaiserar xml innehållet till en lista med Strings (Kategorier), den retuneras sedan
+                return (List<string>)serializer.Deserialize(fs); 
             }
 
         }
 
-        public void LaggTill(string nyKategori) //lägger till ny kategori i listan
+        public void LaggTill(string nyKategori) //lägger Till
         {
             var kategorier = HamtaAlla();
 
@@ -60,9 +59,9 @@ namespace ProjecktPodApp.DL
                 kategorier.Add(nyKategori);
             }
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<string>)); //Skapa en xmlSerializer som hanterar listan
+            XmlSerializer serializer = new XmlSerializer(typeof(List<string>)); 
 
-            using (FileStream fs = new FileStream(KategoriFil, FileMode.Create)) //Öppnar xml-filen för att läsa in data
+            using (FileStream fs = new FileStream(KategoriFil, FileMode.Create)) 
 
             {
                 serializer.Serialize(fs, kategorier);
@@ -71,14 +70,14 @@ namespace ProjecktPodApp.DL
 
 
 
-        public void Andra(string gammalKategori, string nyKategori)
+        public void Andra(string gammalKategori, string nyKategori)//Ändrar
 
         {
             var kategorier = HamtaAlla();
-            int index = kategorier.IndexOf(gammalKategori); // Räknar i listan efter gammalkategori
+            int index = kategorier.IndexOf(gammalKategori); 
             if (index != -1)
             {
-                kategorier[index] = nyKategori; // Ändra namnet
+                kategorier[index] = nyKategori; 
             }
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<string>));
@@ -89,10 +88,10 @@ namespace ProjecktPodApp.DL
             }
         }
 
-        public void TaBort(string gammalKategori)
+        public void TaBort(string gammalKategori)// taBort
         {
             var kategorier = HamtaAlla();
-            int index = kategorier.IndexOf(gammalKategori); // Räknar i listan efter gammalkategori
+            int index = kategorier.IndexOf(gammalKategori); 
             if (index != -1)
             {
                 kategorier.RemoveAt(index);

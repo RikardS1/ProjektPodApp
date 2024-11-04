@@ -11,21 +11,21 @@ namespace ProjektPodApp.BL
 {
     public class KategoriManager 
     {
-        private KategoriDataAccess kategoriDataAccess; //fält av typen KategoriDataAccess (DAL-lagret)
+        private KategoriDataAccess kategoriDataAccess; //fält av typen KategoriDataAccess 
 
         public KategoriManager() 
         {
             kategoriDataAccess = new KategoriDataAccess();
         }
 
-        public List<string> HamtaKategorier() //metodanrop från DL
+        public List<string> HamtaKategorier() //metodanrop 
         {
             return kategoriDataAccess.HamtaAlla();
         }
 
         public void LaggTillKategori(string nyKategori)
         {
-            kategoriDataAccess.LaggTill(nyKategori); //metod som lägger till nyKategori i Datalagret
+            kategoriDataAccess.LaggTill(nyKategori); 
         }
 
         public void AndraKategori(string gammalKategori, string nyKategori)
