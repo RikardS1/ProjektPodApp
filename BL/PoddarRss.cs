@@ -18,7 +18,11 @@ namespace ProjektPodApp.BL
         Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
         "Podd",
         "Podd.xml"); //placeholder
-            private PodDataAccess PodDataAccess;
+
+   
+        private PodDataAccess PodDataAccess;
+
+
         private List<Feed> poddarLista = new List<Feed>();
 
         public PoddarManager()
@@ -67,7 +71,15 @@ namespace ProjektPodApp.BL
         {
             PodDataAccess.LaggTill(nyPoddar);
         }
+        public void LaggTillPoddar2(Feed nyPoddar)
+        {
+            PodDataAccess.AddPodcastToXml(nyPoddar);
+        }
 
+        public void TaBortPoddar2(string gammalPoddar)
+        {
+            PodDataAccess.TaBortPodcastFrånXml(gammalPoddar);
+        }
         public void AndraPoddar(Feed gammalPoddar, Feed nyPoddar)
         {
             PodDataAccess.Andra(gammalPoddar, nyPoddar);
@@ -85,7 +97,6 @@ namespace ProjektPodApp.BL
                 podcastNode.ParentNode.RemoveChild(podcastNode);
                 xmlDoc.Save(xmlFilePath);
             }
-
         }
         public void TaBortPoddar(Feed gammalPoddar)
         {

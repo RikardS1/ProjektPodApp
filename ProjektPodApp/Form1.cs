@@ -24,11 +24,11 @@ namespace ProjektPodApp
         private XmlNodeList RssItems;
         private KategoriManager kategoriManager; //fält som refererar till BLL-lagret
         private PoddarManager poddarManager = new PoddarManager();
-        private string xmlFilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-        "Podd",
-        "savedxml.xml"
-    );
+    //    private string xmlFilePath = Path.Combine(
+    //    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+    //    "Podd",
+    //    "savedxml.xml"
+    //);
 
         public Form1()
         {
@@ -39,7 +39,7 @@ namespace ProjektPodApp
             FiltreraKategorierComboBox();
             FyllDataGridViewMedPoddar();
             listBoxKategori();
-            EnsureXmlFileExists();
+            //EnsureXmlFileExists();
 
         }
 
@@ -121,7 +121,7 @@ namespace ProjektPodApp
                         ManageDataGridView.Rows[rowIndex].Cells[2].Value = nyPodd.Category;
 
                         // Anropa AddPodcastToXml (synkront för att undvika ytterligare await)
-                        AddPodcastToXml(nyPodd);
+                        poddarManager.LaggTillPoddar2(nyPodd);
 
                         //Tömmer RSS, namn och kategori-rutorna så att man kan lägga till ny podd direkt
                         ManageRSSTextBox.Clear();
@@ -167,63 +167,63 @@ namespace ProjektPodApp
         }
 
         //skriver till .xml
-        private void AddPodcastToXml(Feed podcast)
-        {
-            XmlDocument doc = new XmlDocument();
+        //private void AddPodcastToXml(Feed podcast)
+        //{
+        //    XmlDocument doc = new XmlDocument();
 
-            if (!File.Exists(xmlFilePath))
-            {
-                XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
-                XmlNode root = doc.CreateElement("Podcasts");
-                doc.AppendChild(root);
-                doc.InsertBefore(xmlDeclaration, root);
-                doc.Save(xmlFilePath);
-            }
+        //    if (!File.Exists(xmlFilePath))
+        //    {
+        //        XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+        //        XmlNode root = doc.CreateElement("Podcasts");
+        //        doc.AppendChild(root);
+        //        doc.InsertBefore(xmlDeclaration, root);
+        //        doc.Save(xmlFilePath);
+        //    }
 
-            doc.Load(xmlFilePath);
-            XmlNode rootNode = doc.DocumentElement;
+        //    doc.Load(xmlFilePath);
+        //    XmlNode rootNode = doc.DocumentElement;
 
-            XmlElement podcastElement = doc.CreateElement("Podcast");
+        //    XmlElement podcastElement = doc.CreateElement("Podcast");
 
-            XmlElement nameElement = doc.CreateElement("Name");
-            nameElement.InnerText = podcast.Name;
-            podcastElement.AppendChild(nameElement);
+        //    XmlElement nameElement = doc.CreateElement("Name");
+        //    nameElement.InnerText = podcast.Name;
+        //    podcastElement.AppendChild(nameElement);
 
-            XmlElement officialNameElement = doc.CreateElement("OfficialName");
-            officialNameElement.InnerText = podcast.OfficialName;
-            podcastElement.AppendChild(officialNameElement);
+        //    XmlElement officialNameElement = doc.CreateElement("OfficialName");
+        //    officialNameElement.InnerText = podcast.OfficialName;
+        //    podcastElement.AppendChild(officialNameElement);
 
-            XmlElement categoryElement = doc.CreateElement("Category");
-            categoryElement.InnerText = podcast.Category;
-            podcastElement.AppendChild(categoryElement);
+        //    XmlElement categoryElement = doc.CreateElement("Category");
+        //    categoryElement.InnerText = podcast.Category;
+        //    podcastElement.AppendChild(categoryElement);
 
-            XmlElement episodesElement = doc.CreateElement("Episodes");
+        //    XmlElement episodesElement = doc.CreateElement("Episodes");
 
-            foreach (var episode in podcast.Episodes)
-            {
-                XmlElement episodeElement = doc.CreateElement("Episode");
+        //    foreach (var episode in podcast.Episodes)
+        //    {
+        //        XmlElement episodeElement = doc.CreateElement("Episode");
 
-                XmlElement episodeTitle = doc.CreateElement("Title");
-                episodeTitle.InnerText = episode.Title;
-                episodeElement.AppendChild(episodeTitle);
+        //        XmlElement episodeTitle = doc.CreateElement("Title");
+        //        episodeTitle.InnerText = episode.Title;
+        //        episodeElement.AppendChild(episodeTitle);
 
-                XmlElement episodeDescription = doc.CreateElement("Description");
-                episodeDescription.InnerText = episode.Description;
-                episodeElement.AppendChild(episodeDescription);
+        //        XmlElement episodeDescription = doc.CreateElement("Description");
+        //        episodeDescription.InnerText = episode.Description;
+        //        episodeElement.AppendChild(episodeDescription);
 
-                XmlElement episodePubDate = doc.CreateElement("PublishedDate");
-                episodePubDate.InnerText = episode.PublishedDate.ToString("yyyy-MM-dd");
-                episodeElement.AppendChild(episodePubDate);
+        //        XmlElement episodePubDate = doc.CreateElement("PublishedDate");
+        //        episodePubDate.InnerText = episode.PublishedDate.ToString("yyyy-MM-dd");
+        //        episodeElement.AppendChild(episodePubDate);
 
-                episodesElement.AppendChild(episodeElement);
-            }
+        //        episodesElement.AppendChild(episodeElement);
+        //    }
 
-            podcastElement.AppendChild(episodesElement);
-            rootNode.AppendChild(podcastElement);
+        //    podcastElement.AppendChild(episodesElement);
+        //    rootNode.AppendChild(podcastElement);
 
 
-            doc.Save(xmlFilePath);
-        }
+        //    doc.Save(xmlFilePath);
+        //}
 
 
         private void ManageEditButton_Click(object sender, EventArgs e)
@@ -296,7 +296,7 @@ namespace ProjektPodApp
                         }
 
                         //2. ta bort podden från .xml-filen
-                        TaBortPodcastFrånXml(poddNamn);
+                        poddarManager.TaBortPoddar2(poddNamn);
 
                         //3. ta bort podden från DataGridView
                         ManageDataGridView.Rows.RemoveAt(ManageDataGridView.SelectedRows[0].Index);
@@ -311,20 +311,20 @@ namespace ProjektPodApp
             }
         }
 
-        private void TaBortPodcastFrånXml(string poddNamn)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(xmlFilePath);
+        //private void TaBortPodcastFrånXml(string poddNamn)
+        //{
+        //    XmlDocument doc = new XmlDocument();
+        //    doc.Load(xmlFilePath);
 
-            XmlNode rootNode = doc.DocumentElement;
-            XmlNode poddNode = rootNode.SelectSingleNode($"Podcast[Name='{poddNamn}']");
+        //    XmlNode rootNode = doc.DocumentElement;
+        //    XmlNode poddNode = rootNode.SelectSingleNode($"Podcast[Name='{poddNamn}']");
 
-            if (poddNode != null)
-            {
-                rootNode.RemoveChild(poddNode);
-                doc.Save(xmlFilePath);
-            }
-        }
+        //    if (poddNode != null)
+        //    {
+        //        rootNode.RemoveChild(poddNode);
+        //        doc.Save(xmlFilePath);
+        //    }
+        //}
 
 
         private void ManageRSSTextBox_TextChanged(object sender, EventArgs e)
@@ -498,26 +498,26 @@ namespace ProjektPodApp
                 }
             }
         }
-        private void EnsureXmlFileExists()
-        {
-            //kolla om dir finns
-            string directoryPath = Path.GetDirectoryName(xmlFilePath);
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
+        //private void EnsureXmlFileExists()
+        //{
+        //    //kolla om dir finns
+        //    string directoryPath = Path.GetDirectoryName(xmlFilePath);
+        //    if (!Directory.Exists(directoryPath))
+        //    {
+        //        Directory.CreateDirectory(directoryPath);
+        //    }
 
-            if (!File.Exists(xmlFilePath))
-            {
-                using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
-                {
-                    writer.WriteStartDocument();
-                    writer.WriteStartElement("Podcasts"); // Root element
-                    writer.WriteEndElement();
-                    writer.WriteEndDocument();
-                }
-            }
-        }
+        //    if (!File.Exists(xmlFilePath))
+        //    {
+        //        using (XmlWriter writer = XmlWriter.Create(xmlFilePath))
+        //        {
+        //            writer.WriteStartDocument();
+        //            writer.WriteStartElement("Podcasts"); // Root element
+        //            writer.WriteEndElement();
+        //            writer.WriteEndDocument();
+        //        }
+        //    }
+        //}
 
         private void ManageDataGridView_SelectionChanged(object sender, EventArgs e)
         {

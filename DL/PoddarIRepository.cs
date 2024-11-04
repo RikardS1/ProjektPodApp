@@ -3,6 +3,7 @@ using Pod.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace ProjecktPodApp.DL
@@ -14,7 +15,7 @@ namespace ProjecktPodApp.DL
 
         public PodDataAccess()
         {
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);// lägger mappen i lokal dator
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string PoddPath = Path.Combine(desktopPath, PoddFolder);
             PoddFil = Path.Combine(PoddPath, "Podd.xml");
 
@@ -106,6 +107,78 @@ namespace ProjecktPodApp.DL
             }
         }
 
-       
+        public void AddPodcastToXml(Feed podcast)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            if (!File.Exists(PoddFil))
+            {
+                XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+                XmlNode root = doc.CreateElement("Podcasts");
+                doc.AppendChild(root);
+                doc.InsertBefore(xmlDeclaration, root);
+                doc.Save(PoddFil);
+            }
+
+            doc.Load(PoddFil);
+            XmlNode rootNode = doc.DocumentElement;
+
+            XmlElement podcastElement = doc.CreateElement("Podcast");
+
+            XmlElement nameElement = doc.CreateElement("Name");
+            nameElement.InnerText = podcast.Name;
+            podcastElement.AppendChild(nameElement);
+
+            XmlElement officialNameElement = doc.CreateElement("OfficialName");
+            officialNameElement.InnerText = podcast.OfficialName;
+            podcastElement.AppendChild(officialNameElement);
+
+            XmlElement categoryElement = doc.CreateElement("Category");
+            categoryElement.InnerText = podcast.Category;
+            podcastElement.AppendChild(categoryElement);
+
+            XmlElement episodesElement = doc.CreateElement("Episodes");
+
+            foreach (var episode in podcast.Episodes)
+            {
+                XmlElement episodeElement = doc.CreateElement("Episode");
+
+                XmlElement episodeTitle = doc.CreateElement("Title");
+                episodeTitle.InnerText = episode.Title;
+                episodeElement.AppendChild(episodeTitle);
+
+                XmlElement episodeDescription = doc.CreateElement("Description");
+                episodeDescription.InnerText = episode.Description;
+                episodeElement.AppendChild(episodeDescription);
+
+                XmlElement episodePubDate = doc.CreateElement("PublishedDate");
+                episodePubDate.InnerText = episode.PublishedDate.ToString("yyyy-MM-dd");
+                episodeElement.AppendChild(episodePubDate);
+
+                episodesElement.AppendChild(episodeElement);
+            }
+
+            podcastElement.AppendChild(episodesElement);
+            rootNode.AppendChild(podcastElement);
+
+
+            doc.Save(PoddFil);
+        }
+
+        public void TaBortPodcastFrånXml(string poddNamn)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(PoddFil);
+
+            XmlNode rootNode = doc.DocumentElement;
+            XmlNode poddNode = rootNode.SelectSingleNode($"Podcast[Name='{poddNamn}']");
+
+            if (poddNode != null)
+            {
+                rootNode.RemoveChild(poddNode);
+                doc.Save(PoddFil);
+            }
+        }
+
     }
 }
