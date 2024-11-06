@@ -275,25 +275,52 @@ namespace ProjektPodApp
         }
         private void CategoryAddButton_Click(object sender, EventArgs e)
         {
-            string nyKategori = CategoryManageTextBox.Text.Trim(); //trim tar bort oönskade mellanslag 
-
-
-
+            string nyKategori = CategoryManageTextBox.Text.Trim();
+            if (!string.IsNullOrEmpty(nyKategori))
+            {
+                Validering valideraFinnsRedan = new Validering();
+                bool finnsInte = valideraFinnsRedan.ValidateNewCategory(nyKategori);
+                if (finnsInte)
+                {
+                    Validering valideraTecken = new Validering();
+                bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
+            }
+        }
             try
             {
-
-                kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
-                listBoxKategori();
-                listBoxKategori(); // Uppdatera listboxen
-                FyllKategoriComboBox();
-                FiltreraKategorierComboBox();//fyller listboxen igen för att se den nya kategorin
-                CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
-
+                {
+                    // Lägg till kategorin om den inte redan finns
+                    kategoriManager.LaggTillKategori(nyKategori); // Anropa metod i BLL-lagret
+                    listBoxKategori(); // Uppdatera listboxen
+                    FyllKategoriComboBox();
+                    FiltreraKategorierComboBox(); // Uppdatera listan för att visa den nya kategorin
+                    CategoryManageTextBox.Clear(); // Rensa textboxen efter att kategorin lagts till
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Felmeddelande", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+            //string nyKategori = CategoryManageTextBox.Text.Trim(); //trim tar bort oönskade mellanslag 
+
+
+
+            //try
+            //{
+
+            //    kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
+            //    listBoxKategori();
+            //    listBoxKategori(); // Uppdatera listboxen
+            //    FyllKategoriComboBox();
+            //    FiltreraKategorierComboBox();//fyller listboxen igen för att se den nya kategorin
+            //    CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
             //    }
             //if (!string.IsNullOrEmpty(nyKategori))
             //{
@@ -322,9 +349,9 @@ namespace ProjektPodApp
             //    else
             //    {
             //        MessageBox.Show("Ange en kategori.");
-            //    }
-        }
-        private void FiltreraKategorierComboBox() //metod som filtrerar kategoirer. Använder samma metoder i BLL som FyllKategoriComboBox gör.
+            //    //    }
+            //}
+            private void FiltreraKategorierComboBox() //metod som filtrerar kategoirer. Använder samma metoder i BLL som FyllKategoriComboBox gör.
         {
             List<string> kategorier = kategoriManager.HamtaKategorier();
             ManageFilterComboBox.Items.Clear();
