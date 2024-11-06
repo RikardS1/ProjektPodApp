@@ -436,6 +436,9 @@ namespace ProjektPodApp
 
         private void ManageFilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            EpisodeListBox.Items.Clear();
+            EpisodeDescTextBox.Clear();
+
             string valdKategori = ManageFilterComboBox.SelectedItem?.ToString();
             List<Feed> poddar = poddarManager.HamtaPoddar(); // Hämtar alla poddar
 
