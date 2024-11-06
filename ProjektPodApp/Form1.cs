@@ -104,6 +104,20 @@ namespace ProjektPodApp
                             MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
+                        
+                        foreach (DataGridViewRow row in ManageDataGridView.Rows)
+                        {
+                            Validering uniktnamn = new Validering();
+                            uniktnamn.ValideraUniktNamn(row.Cells[0].Value.ToString(), name);
+                            bool äruniktnamn = uniktnamn.ValideraUniktNamn(row.Cells[0].Value.ToString(), name);
+
+                            if (!äruniktnamn)
+                            {
+                                MessageBox.Show($"Fel: en podd med namnet {name} existerar redan.", "Nu blev det tokigt", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                return;
+                            }
+                        }
 
                         string OfficialName = nameNode.InnerText;
                         var episodes = ParseEpisodes(rssDoc);

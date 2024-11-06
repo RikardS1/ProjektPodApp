@@ -92,6 +92,27 @@ namespace BL
             return true;
         }
 
+        //validera så man inte kan lägga till 2st av samma RSS flöden
+        public bool ValideraUniktNamn(string newnamn, string oldnamn)
+        {
+            try
+            {
+                if (newnamn.Equals(oldnamn))
+                {
+                    return false;
+                }
+                return true;
+            } catch (Exception ex)
+            {
+                Console.WriteLine("what the sigma");
+                throw ex;
+            }
+        }
+            
+
+
+
+
         //validera RSS URL - returnar true om det är en valid RSS URL
         public bool ValidateRSS(string feedUrl)
         {
