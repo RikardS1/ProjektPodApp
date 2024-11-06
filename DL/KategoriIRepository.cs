@@ -1,4 +1,5 @@
 ﻿using System;
+using Pod.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace ProjecktPodApp.DL
             string kategorierPath = Path.Combine(desktopPath, KategoriFolder);
 
             // Sätt sökvägen till filen
-            KategoriFil = Path.Combine(kategorierPath, "kategorier.xml");
+            KategoriFil = Path.Combine(kategorierPath, "kategori.xml");
 
             
             if (!Directory.Exists(kategorierPath))
@@ -37,7 +38,7 @@ namespace ProjecktPodApp.DL
         {
             if (!File.Exists(KategoriFil))
             {
-                return new List<string> { "Humor", "Hälsa","Sport ", "Utbildning", "True crime", "Historia" ,"Musik"};
+                return new List<string> ();/*{*//* "Humor", "Hälsa","Sport ", "Utbildning", "True crime", "Historia" ,"Musik"};*/
             }
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<string>)); 

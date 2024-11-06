@@ -26,7 +26,7 @@ namespace BL
         {
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string kategorierPath = Path.Combine(desktopPath, catfolder);
-            catFile = Path.Combine(kategorierPath, "kategorier.xml");
+            catFile = Path.Combine(kategorierPath, "kategori.xml");
 
             try
             {

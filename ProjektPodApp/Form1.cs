@@ -15,6 +15,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Net;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProjektPodApp
 {
@@ -163,51 +164,6 @@ namespace ProjektPodApp
 
         private void ManageEditButton_Click(object sender, EventArgs e)
         {
-            //if (ManageDataGridView.SelectedRows.Count > 0)
-            //{
-
-            //    string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString(); // origo selected
-            //    string newName = ManageNameTextBox.Text.Trim();                                 // sigma
-            //    string newCategory = ManageCategoryComboBox.SelectedItem?.ToString();
-
-
-            //    if (!string.IsNullOrEmpty(newName) && !string.IsNullOrEmpty(newCategory))
-            //    {
-            //        DialogResult result = MessageBox.Show("Är du säkert att ändra namn och kategori",
-            //                                              "Editing a Podcast", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            //        if (result == DialogResult.Yes)
-            //        {
-            //            //hitta existerande podcast med namn
-            //            Feed oldPodcast = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == oldName);
-
-            //            if (oldPodcast != null)
-
-            //            {
-            //                Feed updatedPodcast = new Feed(newName, oldPodcast.OfficialName, newCategory, oldPodcast.Episodes);
-
-            //                poddarManager.AndraPoddar(oldPodcast, updatedPodcast);
-
-            //                ManageDataGridView.SelectedRows[0].Cells[0].Value = updatedPodcast.Name;
-            //                ManageDataGridView.SelectedRows[0].Cells[2].Value = updatedPodcast.Category;
-
-            //                MessageBox.Show("Uppdatering lyckades.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("Finns inget data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("vänligen välj ett nytt namn.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Välj en pod som du vill ändra.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
             if (ManageDataGridView.SelectedRows.Count > 0)
             {
                 string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
@@ -226,15 +182,15 @@ namespace ProjektPodApp
 
                     if (result == DialogResult.Yes)
                     {
-                        // Hitta existerande podcast med det gamla namnet
+                        
                         Feed oldPodcast = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == oldName);
 
                         if (oldPodcast != null)
                         {
-                            // Om inget nytt namn anges, behåll det gamla namnet
+                            
                             string finalName = nameChanged ? newName : oldPodcast.Name;
 
-                            // Om ingen ny kategori anges, behåll den gamla kategorin
+                         
                             string finalCategory = categoryChanged ? newCategory : oldPodcast.Category;
 
                             Feed updatedPodcast = new Feed(finalName, oldPodcast.OfficialName, finalCategory, oldPodcast.Episodes);
@@ -320,34 +276,53 @@ namespace ProjektPodApp
         private void CategoryAddButton_Click(object sender, EventArgs e)
         {
             string nyKategori = CategoryManageTextBox.Text.Trim(); //trim tar bort oönskade mellanslag 
-            if (!string.IsNullOrEmpty(nyKategori))
+
+
+
+            try
             {
-                Validering valideraFinnsRedan = new Validering();
-                bool finnsInte = valideraFinnsRedan.ValidateNewCategory(nyKategori);
-                if(finnsInte)
-                {
-                    Validering valideraTecken = new Validering();
-                    bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
-                    if(check)
-                    {
-                        kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
-                        listBoxKategori(); //fyller listboxen igen för att se den nya kategorin
-                        CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ange en valid kategori.");
-                    }
-                } 
-                else
-                {
-                    MessageBox.Show("Kategori med samma namn finns redan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
+                kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
+                listBoxKategori();
+                listBoxKategori(); // Uppdatera listboxen
+                FyllKategoriComboBox();
+                FiltreraKategorierComboBox();//fyller listboxen igen för att se den nya kategorin
+                CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
+
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Ange en kategori.");
+                MessageBox.Show(ex.Message);
             }
+            //    }
+            //if (!string.IsNullOrEmpty(nyKategori))
+            //{
+            //    Validering valideraFinnsRedan = new Validering();
+            //    bool finnsInte = valideraFinnsRedan.ValidateNewCategory(nyKategori);
+            //    if(finnsInte)
+            //    //    {
+            //            Validering valideraTecken = new Validering();
+            //            bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
+            //            if(check)
+            //            {
+            //                kategoriManager.LaggTillKategori(nyKategori); //anropa metod i BLL-lagret
+            //                listBoxKategori(); //fyller listboxen igen för att se den nya kategorin
+            //                CategoryManageTextBox.Clear(); //rensar textbox efter att vi lagt till kategorin
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("Ange en valid kategori.");
+            //            }
+            //        } 
+            //        else
+            //        {
+            //            MessageBox.Show("Kategori med samma namn finns redan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Ange en kategori.");
+            //    }
         }
         private void FiltreraKategorierComboBox() //metod som filtrerar kategoirer. Använder samma metoder i BLL som FyllKategoriComboBox gör.
         {
