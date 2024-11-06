@@ -92,6 +92,15 @@ namespace BL
             return true;
         }
 
+        public bool NullOrEmpty (string check) 
+        {
+            if (check == null || check == "")
+            {
+                return true;
+            }
+            return false;
+        }
+        
         //validera så man inte kan lägga till 2st av samma RSS flöden
         public bool ValideraUniktNamn(string newnamn, string oldnamn)
         {

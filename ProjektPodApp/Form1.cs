@@ -104,7 +104,19 @@ namespace ProjektPodApp
                             MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return; //haha return of Kayhan
                         }
-                        
+                        bool namecheck = urlValidering.NullOrEmpty(name);
+                        if (namecheck) //check namnbox
+                        {
+                            MessageBox.Show("Ange ett namn. Namnrutan är tom.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        bool catcheck = urlValidering.NullOrEmpty(kategori);
+                        if (catcheck) //check kategoribox
+                        {
+                            MessageBox.Show("Ange en kategori. Kategorirutan är tom.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
                         foreach (DataGridViewRow row in ManageDataGridView.Rows)
                         {
                             Validering uniktnamn = new Validering();
