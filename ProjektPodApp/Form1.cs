@@ -284,23 +284,27 @@ namespace ProjektPodApp
                 {
                     Validering valideraTecken = new Validering();
                 bool check = valideraTecken.ValidateText(nyKategori, 1, 20, false);
-            }
-        }
-            try
-            {
+                    try
+                    {
+                        {
+                            // Lägg till kategorin om den inte redan finns
+                            kategoriManager.LaggTillKategori(nyKategori); // Anropa metod i BLL-lagret
+                            listBoxKategori(); // Uppdatera listboxen
+                            FyllKategoriComboBox();
+                            FiltreraKategorierComboBox(); // Uppdatera listan för att visa den nya kategorin
+                            CategoryManageTextBox.Clear(); // Rensa textboxen efter att kategorin lagts till
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Felmeddelande", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                } else
                 {
-                    // Lägg till kategorin om den inte redan finns
-                    kategoriManager.LaggTillKategori(nyKategori); // Anropa metod i BLL-lagret
-                    listBoxKategori(); // Uppdatera listboxen
-                    FyllKategoriComboBox();
-                    FiltreraKategorierComboBox(); // Uppdatera listan för att visa den nya kategorin
-                    CategoryManageTextBox.Clear(); // Rensa textboxen efter att kategorin lagts till
+                    MessageBox.Show("Kategori med samma namn finns redan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Felmeddelande", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+        }
+            
         }
             //string nyKategori = CategoryManageTextBox.Text.Trim(); //trim tar bort oönskade mellanslag 
 
