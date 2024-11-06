@@ -102,7 +102,7 @@ namespace ProjektPodApp
                         if (nameNode == null)
                         {
                             MessageBox.Show("Kunde inte hitta en podcast vid det namnet.", "Kunde inte hitta", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            return; //haha return of Kayhan
                         }
                         
                         foreach (DataGridViewRow row in ManageDataGridView.Rows)
