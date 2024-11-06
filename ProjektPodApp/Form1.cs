@@ -163,52 +163,108 @@ namespace ProjektPodApp
 
         private void ManageEditButton_Click(object sender, EventArgs e)
         {
+            //if (ManageDataGridView.SelectedRows.Count > 0)
+            //{
+
+            //    string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString(); // origo selected
+            //    string newName = ManageNameTextBox.Text.Trim();                                 // sigma
+            //    string newCategory = ManageCategoryComboBox.SelectedItem?.ToString();
+
+
+            //    if (!string.IsNullOrEmpty(newName) && !string.IsNullOrEmpty(newCategory))
+            //    {
+            //        DialogResult result = MessageBox.Show("Är du säkert att ändra namn och kategori",
+            //                                              "Editing a Podcast", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            //        if (result == DialogResult.Yes)
+            //        {
+            //            //hitta existerande podcast med namn
+            //            Feed oldPodcast = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == oldName);
+
+            //            if (oldPodcast != null)
+
+            //            {
+            //                Feed updatedPodcast = new Feed(newName, oldPodcast.OfficialName, newCategory, oldPodcast.Episodes);
+
+            //                poddarManager.AndraPoddar(oldPodcast, updatedPodcast);
+
+            //                ManageDataGridView.SelectedRows[0].Cells[0].Value = updatedPodcast.Name;
+            //                ManageDataGridView.SelectedRows[0].Cells[2].Value = updatedPodcast.Category;
+
+            //                MessageBox.Show("Uppdatering lyckades.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("Finns inget data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("vänligen välj ett nytt namn.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Välj en pod som du vill ändra.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
             if (ManageDataGridView.SelectedRows.Count > 0)
             {
-                
-                string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString(); // origo selected
-                string newName = ManageNameTextBox.Text.Trim();                                 // sigma
+                string oldName = ManageDataGridView.SelectedRows[0].Cells[0].Value?.ToString();
+                string oldCategory = ManageDataGridView.SelectedRows[0].Cells[2].Value?.ToString();
+                string newName = ManageNameTextBox.Text.Trim();
                 string newCategory = ManageCategoryComboBox.SelectedItem?.ToString();
 
-               
-                if (!string.IsNullOrEmpty(newName) && !string.IsNullOrEmpty(newCategory))
+                // Kontrollera om det finns något nytt värde att uppdatera
+                bool nameChanged = !string.IsNullOrEmpty(newName) && newName != oldName;
+                bool categoryChanged = !string.IsNullOrEmpty(newCategory) && newCategory != oldCategory;
+
+                if (nameChanged || categoryChanged)
                 {
-                    DialogResult result = MessageBox.Show("Är du säkert att ändra namn och kategori",
-                                                          "Editing a Podcast", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult result = MessageBox.Show("Är du säker på att du vill göra ändringarna?",
+                                                          "Redigera Podcast", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (result == DialogResult.Yes)
                     {
-                        //hitta existerande podcast med namn
+                        // Hitta existerande podcast med det gamla namnet
                         Feed oldPodcast = poddarManager.HamtaPoddar().FirstOrDefault(p => p.Name == oldName);
 
                         if (oldPodcast != null)
-                            
                         {
-                            Feed updatedPodcast = new Feed(newName, oldPodcast.OfficialName, newCategory, oldPodcast.Episodes);
+                            // Om inget nytt namn anges, behåll det gamla namnet
+                            string finalName = nameChanged ? newName : oldPodcast.Name;
+
+                            // Om ingen ny kategori anges, behåll den gamla kategorin
+                            string finalCategory = categoryChanged ? newCategory : oldPodcast.Category;
+
+                            Feed updatedPodcast = new Feed(finalName, oldPodcast.OfficialName, finalCategory, oldPodcast.Episodes);
 
                             poddarManager.AndraPoddar(oldPodcast, updatedPodcast);
 
+                            // Uppdatera DataGridView med de nya värdena
                             ManageDataGridView.SelectedRows[0].Cells[0].Value = updatedPodcast.Name;
                             ManageDataGridView.SelectedRows[0].Cells[2].Value = updatedPodcast.Category;
+                            ManageNameTextBox.Clear();
+                            ManageCategoryComboBox.SelectedIndex = -1;
+
 
                             MessageBox.Show("Uppdatering lyckades.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Finns inget data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Ingen data hittades.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("vänligen välj ett nytt namn.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Inga ändringar gjordes eftersom varken namn eller kategori har ändrats.", "Ingen ändring", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Välj en pod som du vill ändra.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Välj en podcast som du vill ändra.", "Ingen val", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         private void ManageRemoveButton_Click(object sender, EventArgs e)
